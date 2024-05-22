@@ -1,5 +1,7 @@
+import Container from "../../components/Container/Container";
+
 const ReadingPage = () => {
-  return <div>ReadingPage</div>;
+  return <Container>ReadingPage</Container>;
 };
 
 export default ReadingPage;

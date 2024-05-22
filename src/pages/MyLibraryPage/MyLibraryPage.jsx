@@ -1,5 +1,7 @@
+import Container from "../../components/Container/Container";
+
 const MyLibraryPage = () => {
-  return <div>MyLibraryPage</div>;
+  return <Container>MyLibraryPage</Container>;
 };
 
 export default MyLibraryPage;
