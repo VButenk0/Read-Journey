@@ -6,12 +6,16 @@ export const Global = createGlobalStyle`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 body {
   color: var(--primary-text);
-  font-family: "Gilroy";
+  font-family: "Gilroy Medium";
   font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.28px;
+
   background-color: var(--main-bg-color);
 
   min-width: 320px;
@@ -55,6 +59,13 @@ button {
   background-color: transparent;
   padding: 0;
   cursor: pointer;
-}`;
+}
+
+input{
+  background: transparent;
+  border: none;
+  outline: none;
+}
+`;
 
 export default Global;
