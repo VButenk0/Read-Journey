@@ -5,6 +5,8 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RecommendedPage from "./pages/RecommendedPage/RecommendedPage";
 import MyLibraryPage from "./pages/MyLibraryPage/MyLibraryPage";
 import ReadingPage from "./pages/ReadingPage/ReadingPage";
+import PrivateRoute from "./routesConfig/PrivateRoute";
+import PublicRoute from "./routesConfig/PublicRoute";
 
 function App() {
   return (
@@ -13,49 +15,42 @@ function App() {
         <Route
           path="/register"
           element={
-            // <PublicRoute>
-            <RegisterPage />
-            // </PublicRoute>
+            <PublicRoute>
+              <RegisterPage />
+            </PublicRoute>
           }
         />
         <Route
           path="/login"
           element={
-            // <PublicRoute>
-            <LoginPage />
-            // </PublicRoute>
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
           }
         />
-        <Route
-          path="/"
-          element={
-            // <PrivateRoute>
-            <MainLayout />
-            // </PrivateRoute>
-          }
-        >
+        <Route path="/" element={<MainLayout />}>
           <Route
             path="/recommended"
             element={
-              // <PrivateRoute>
-              <RecommendedPage />
-              // </PrivateRoute>
+              <PrivateRoute>
+                <RecommendedPage />
+              </PrivateRoute>
             }
           />
           <Route
             path="/library"
             element={
-              // <PrivateRoute>
-              <MyLibraryPage />
-              // </PrivateRoute>
+              <PrivateRoute>
+                <MyLibraryPage />
+              </PrivateRoute>
             }
           />
           <Route
             path="/reading"
             element={
-              // <PrivateRoute>
-              <ReadingPage />
-              // </PrivateRoute>
+              <PrivateRoute>
+                <ReadingPage />
+              </PrivateRoute>
             }
           />
         </Route>

@@ -11,6 +11,18 @@ import {
   deleteReadingThunk,
 } from "./operations";
 
+const thunks = [
+  recommendBooksThunk,
+  addBookThunk,
+  addRcmndBookThunk,
+  deleteBookThunk,
+  getUserBooksThunk,
+  startReadingThunk,
+  finishReadingThunk,
+  deleteReadingThunk,
+  getBookInfoThunk,
+];
+
 export const booksSlice = createSlice({
   name: "books",
   initialState: {
@@ -38,18 +50,7 @@ export const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        (action) =>
-          [
-            recommendBooksThunk.fulfilled,
-            addBookThunk.fulfilled,
-            addRcmndBookThunk.fulfilled,
-            deleteBookThunk.fulfilled,
-            getUserBooksThunk.fulfilled,
-            startReadingThunk.fulfilled,
-            finishReadingThunk.fulfilled,
-            deleteReadingThunk.fulfilled,
-            getBookInfoThunk.fulfilled,
-          ].some((thunk) => thunk.fulfilled.match(action)),
+        (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
         (state, { payload }) => {
           if (recommendBooksThunk.fulfilled.match(payload)) {
             state.books = payload.results;
@@ -66,36 +67,14 @@ export const booksSlice = createSlice({
         }
       )
       .addMatcher(
-        (action) =>
-          [
-            recommendBooksThunk.rejected,
-            addBookThunk.rejected,
-            addRcmndBookThunk.rejected,
-            deleteBookThunk.rejected,
-            getUserBooksThunk.rejected,
-            startReadingThunk.rejected,
-            finishReadingThunk.rejected,
-            deleteReadingThunk.rejected,
-            getBookInfoThunk.rejected,
-          ].some((thunk) => thunk.rejected.match(action)),
+        (action) => thunks.some((thunk) => thunk.rejected.match(action)),
         (state, { payload }) => {
           state.isLoading = false;
           state.isError = payload;
         }
       )
       .addMatcher(
-        (action) =>
-          [
-            recommendBooksThunk.pending,
-            addBookThunk.pending,
-            addRcmndBookThunk.pending,
-            deleteBookThunk.pending,
-            getUserBooksThunk.pending,
-            startReadingThunk.pending,
-            finishReadingThunk.pending,
-            deleteReadingThunk.pending,
-            getBookInfoThunk.pending,
-          ].some((thunk) => thunk.pending.match(action)),
+        (action) => thunks.some((thunk) => thunk.pending.match(action)),
         (state) => {
           state.isLoading = true;
           state.isError = null;

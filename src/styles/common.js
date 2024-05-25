@@ -12,7 +12,7 @@ body {
   color: var(--primary-text);
   font-family: "Gilroy Medium";
   font-size: 14px;
-  line-height: 1.29;
+  line-height: 1.28571;
   letter-spacing: -0.28px;
 
   background-color: var(--main-bg-color);
