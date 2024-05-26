@@ -5,7 +5,15 @@ export const recommendBooksThunk = createAsyncThunk(
   "books/recommend",
   async (credentials, thunkApi) => {
     try {
-      const { data } = await api.get("/books/recommend", credentials);
+      const { title, author, page, limit } = credentials;
+      const params = new URLSearchParams();
+
+      if (title) params.append("title", title);
+      if (author) params.append("author", author);
+      if (page) params.append("page", page);
+      if (limit) params.append("limit", limit);
+
+      const { data } = await api.get(`/books/recommend?${params.toString()}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
