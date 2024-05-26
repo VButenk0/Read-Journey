@@ -7,8 +7,17 @@ import MyLibraryPage from "./pages/MyLibraryPage/MyLibraryPage";
 import ReadingPage from "./pages/ReadingPage/ReadingPage";
 import PrivateRoute from "./routesConfig/PrivateRoute";
 import PublicRoute from "./routesConfig/PublicRoute";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { currentThunk } from "./redux/auth/operations";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(currentThunk());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
@@ -28,31 +37,17 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route path="/" element={<MainLayout />}>
-          <Route
-            path="/recommended"
-            element={
-              <PrivateRoute>
-                <RecommendedPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/library"
-            element={
-              <PrivateRoute>
-                <MyLibraryPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/reading"
-            element={
-              <PrivateRoute>
-                <ReadingPage />
-              </PrivateRoute>
-            }
-          />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <MainLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/recommended" element={<RecommendedPage />} />
+          <Route path="/library" element={<MyLibraryPage />} />
+          <Route path="/reading" element={<ReadingPage />} />
         </Route>
       </Routes>
     </>

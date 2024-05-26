@@ -49,23 +49,65 @@ export const booksSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(
-        (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
-        (state, { payload }) => {
-          if (recommendBooksThunk.fulfilled.match(payload)) {
-            state.books = payload.results;
-            state.totalPages = payload.totalPages;
-            state.page = payload.page;
-            state.perPage = payload.perPage;
-          } else if (getUserBooksThunk.fulfilled.match(payload)) {
-            state.library = payload;
-          } else if (getBookInfoThunk.fulfilled.match(payload)) {
-            state.bookStat = payload;
-          }
-          state.isLoading = false;
-          state.isError = null;
-        }
-      )
+      .addCase(recommendBooksThunk.fulfilled, (state, { payload }) => {
+        state.books = payload.results;
+        state.totalPages = payload.totalPages;
+        state.page = payload.page;
+        state.perPage = payload.perPage;
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(addBookThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(addRcmndBookThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(deleteBookThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(getUserBooksThunk.fulfilled, (state, { payload }) => {
+        state.library = payload;
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(startReadingThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(finishReadingThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(deleteReadingThunk.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = null;
+      })
+      .addCase(getBookInfoThunk.fulfilled, (state, { payload }) => {
+        state.bookStat = payload;
+        state.isLoading = false;
+        state.isError = null;
+      })
+      // .addMatcher(
+      //   (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
+      //   (state, { payload }) => {
+      //     if (recommendBooksThunk.fulfilled.match(payload)) {
+      //       state.books = payload.results;
+      //       state.totalPages = payload.totalPages;
+      //       state.page = payload.page;
+      //       state.perPage = payload.perPage;
+      //     } else if (getUserBooksThunk.fulfilled.match(payload)) {
+      //       state.library = payload;
+      //     } else if (getBookInfoThunk.fulfilled.match(payload)) {
+      //       state.bookStat = payload;
+      //     }
+      //     state.isLoading = false;
+      //     state.isError = null;
+      //   }
+      // )
       .addMatcher(
         (action) => thunks.some((thunk) => thunk.rejected.match(action)),
         (state, { payload }) => {

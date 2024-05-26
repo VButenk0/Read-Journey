@@ -67,19 +67,20 @@ export const InputWrpr = styled.div`
 
   &:hover,
   &:focus-within {
-    border: 2px solid
-      ${(props) => (props.$isfilled ? "inherit" : "var(--border10-color)")};
+    border: 2px solid var(--border10-color);
   }
 
-  ${({ $isvalid, $haserror }) => css`
+  ${({ $isvalid, $haserror, $isfilled }) => css`
     border: 2px solid
-      ${$haserror ? "var(--red)" : $isvalid ? "var(--green)" : "transparent"};
-    svg {
-      fill: ${$haserror
+      ${$haserror
         ? "var(--red)"
         : $isvalid
         ? "var(--green)"
+        : $isfilled
+        ? "inherit"
         : "transparent"};
+    svg {
+      fill: ${$haserror ? "var(--red)" : $isvalid && "var(--green)"};
     }
   `}
 
@@ -101,6 +102,10 @@ export const InputWrpr = styled.div`
 
   svg {
     cursor: pointer;
+  }
+
+  :nth-child(4) {
+    padding-left: 5px;
   }
 `;
 

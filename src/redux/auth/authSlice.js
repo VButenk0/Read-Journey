@@ -28,33 +28,65 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addMatcher(
-        (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
-        (state, { payload }) => {
-          if (
-            signupThunk.fulfilled.match(payload) ||
-            signinThunk.fulfilled.match(payload) ||
-            currentThunk.fulfilled.match(payload)
-          ) {
-            state.user.email = payload.email;
-            state.user.name = payload.name;
-            state.token = payload.token;
-            state.refreshToken = payload.refreshToken;
-            state.isLogged = true;
-          } else if (refreshThunk.fulfilled.match(payload)) {
-            state.token = payload.token;
-            state.refreshToken = payload.refreshToken;
-          } else if (signoutThunk.fulfilled.match(payload)) {
-            state.user.email = "";
-            state.user.name = "";
-            state.token = "";
-            state.refreshToken = "";
-            state.isLogged = false;
-          }
-          state.isLoading = false;
-          state.isError = null;
-        }
-      )
+      .addCase(signupThunk.fulfilled, (state, { payload }) => {
+        state.user.email = payload.email;
+        state.user.name = payload.name;
+        state.token = payload.token;
+        state.refreshToken = payload.refreshToken;
+        state.isLogged = true;
+      })
+      .addCase(signinThunk.fulfilled, (state, { payload }) => {
+        state.user.email = payload.email;
+        state.user.name = payload.name;
+        state.token = payload.token;
+        state.refreshToken = payload.refreshToken;
+        state.isLogged = true;
+      })
+      .addCase(currentThunk.fulfilled, (state, { payload }) => {
+        state.user.email = payload.email;
+        state.user.name = payload.name;
+        state.token = payload.token;
+        state.refreshToken = payload.refreshToken;
+        state.isLogged = true;
+      })
+      .addCase(refreshThunk.fulfilled, (state, { payload }) => {
+        state.token = payload.token;
+        state.refreshToken = payload.refreshToken;
+      })
+      .addCase(signoutThunk.fulfilled, (state) => {
+        state.user.email = "";
+        state.user.name = "";
+        state.token = "";
+        state.refreshToken = "";
+        state.isLogged = false;
+      })
+      // .addMatcher(
+      //   (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
+      //   (state, { payload }) => {
+      //     if (
+      //       signupThunk.fulfilled.match(payload) ||
+      //       signinThunk.fulfilled.match(payload) ||
+      //       currentThunk.fulfilled.match(payload)
+      //     ) {
+      //       state.user.email = payload.email;
+      //       state.user.name = payload.name;
+      //       state.token = payload.token;
+      //       state.refreshToken = payload.refreshToken;
+      //       state.isLogged = true;
+      //     } else if (refreshThunk.fulfilled.match(payload)) {
+      //       state.token = payload.token;
+      //       state.refreshToken = payload.refreshToken;
+      //     } else if (signoutThunk.fulfilled.match(payload)) {
+      //       state.user.email = "";
+      //       state.user.name = "";
+      //       state.token = "";
+      //       state.refreshToken = "";
+      //       state.isLogged = false;
+      //     }
+      //     state.isLoading = false;
+      //     state.isError = null;
+      //   }
+      // )
       .addMatcher(
         (action) => thunks.some((thunk) => thunk.rejected.match(action)),
         (state, { payload }) => {

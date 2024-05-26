@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -20,15 +20,19 @@ import {
   ErrorMsg,
   SuccessMsg,
 } from "./AuthPage.styled";
+import { useNavigate } from "react-router-dom";
+import { selectIsLogged } from "../../redux/selectors";
 
 const AuthForm = ({ mode }) => {
-  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector(selectIsLogged);
+  const [showPassword, setShowPassword] = useState(false);
   const isLogin = mode === "login";
 
   const validationSchema = Yup.object().shape({
     name: !isLogin && Yup.string().required("Name is required"),
-    mail: Yup.string()
+    email: Yup.string()
       .email("Invalid email format")
       .required("Mail is required"),
     password: Yup.string()
@@ -39,25 +43,37 @@ const AuthForm = ({ mode }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    formState: { errors, dirtyFields },
     trigger,
     watch,
   } = useForm({
     resolver: yupResolver(validationSchema),
-    mode: "onTouched",
+    mode: "onBlur",
   });
 
   const watchedFields = watch();
 
-  const isvalid = (fieldName) => {
-    return !errors[fieldName] && touchedFields[fieldName];
+  const isFieldValid = (fieldName) => {
+    return (
+      dirtyFields[fieldName] &&
+      !errors[fieldName] &&
+      fieldName === "password" &&
+      watchedFields[fieldName]?.length >= 7
+    );
   };
 
   const onSubmit = (data) => {
+    console.log(data);
     if (isLogin) {
-      dispatch(signinThunk(data));
+      dispatch(signinThunk(data)).then((res) => {
+        console.log(`Welcome back, ${res.name}!`);
+        navigate("/recommended");
+      });
     } else {
-      dispatch(signupThunk(data));
+      dispatch(signupThunk(data)).then((res) => {
+        console.log(`Welcome, ${res.name}!`);
+        navigate("/recommended");
+      });
     }
   };
 
@@ -77,11 +93,7 @@ const AuthForm = ({ mode }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <InputsWrpr>
               {!isLogin && (
-                <InputWrpr
-                  $haserror={errors.name}
-                  $isfilled={!!watchedFields.name}
-                  $isvalid={isvalid("name")}
-                >
+                <InputWrpr $haserror={!!errors.name}>
                   <label htmlFor="name">Name:</label>
                   <input
                     id="name"
@@ -91,33 +103,35 @@ const AuthForm = ({ mode }) => {
                     {...register("name")}
                     onBlur={() => trigger("name")}
                   />
+                  {errors.name && (
+                    <svg width="20" height="20">
+                      <use href={sprite + "#error"}></use>
+                    </svg>
+                  )}
                   {errors.name && <ErrorMsg>{errors.name.message}</ErrorMsg>}
                 </InputWrpr>
               )}
-              <InputWrpr
-                $haserror={errors.mail}
-                $isfilled={!!watchedFields.mail}
-                $isvalid={isvalid("mail")}
-              >
-                <label htmlFor="mail">Mail:</label>
+              <InputWrpr $haserror={!!errors.email}>
+                <label htmlFor="email">Mail:</label>
                 <input
-                  id="mail"
-                  name="mail"
+                  id="email"
+                  name="email"
                   type="text"
                   placeholder="Enter your email"
-                  {...register("mail")}
-                  onBlur={() => trigger("mail")}
+                  {...register("email")}
+                  onBlur={() => trigger("email")}
                 />
-                {errors.mail ? (
-                  <ErrorMsg>{errors.mail.message}</ErrorMsg>
-                ) : (
-                  watchedFields.mail && <SuccessMsg>Mail is secure</SuccessMsg>
+                {errors.mail && (
+                  <svg width="20" height="20">
+                    <use href={sprite + "#error"}></use>
+                  </svg>
                 )}
+                {errors.mail && <ErrorMsg>{errors.email.message}</ErrorMsg>}
               </InputWrpr>
               <InputWrpr
-                $haserror={errors.password}
+                $haserror={!!errors.password}
                 $isfilled={!!watchedFields.password}
-                $isvalid={isvalid("password")}
+                $isvalid={isFieldValid("password")}
               >
                 <label htmlFor="password">Password:</label>
                 <input
@@ -128,21 +142,38 @@ const AuthForm = ({ mode }) => {
                   {...register("password")}
                   onBlur={() => trigger("password")}
                 />
-                <svg
-                  width="20"
-                  height="20"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <use
-                    href={`${sprite}#${showPassword ? "eye-off" : "eye"}`}
-                  ></use>
-                </svg>
+                {showPassword ? (
+                  <svg
+                    width="20"
+                    height="20"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    <use href={sprite + "#eye-off"}></use>
+                  </svg>
+                ) : (
+                  <svg
+                    width="20"
+                    height="20"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    <use href={sprite + "#eye"}></use>
+                  </svg>
+                )}
+                {errors.password && (
+                  <svg width="20" height="20">
+                    <use href={sprite + "#error"}></use>
+                  </svg>
+                )}
+                {isFieldValid("password") && watchedFields.password && (
+                  <svg width="20" height="20">
+                    <use href={sprite + "#correct"}></use>
+                  </svg>
+                )}
                 {errors.password ? (
                   <ErrorMsg>{errors.password.message}</ErrorMsg>
                 ) : (
-                  !!watchedFields.password &&
-                  isvalid("password") && (
+                  watchedFields.password &&
+                  isFieldValid("password") && (
                     <SuccessMsg>Password is secure</SuccessMsg>
                   )
                 )}
