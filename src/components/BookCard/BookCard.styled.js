@@ -5,6 +5,8 @@ export const BookWrpr = styled.div`
   flex-direction: column;
   gap: 8px;
 
+  cursor: pointer;
+
   img {
     width: 137px;
     height: 208px;

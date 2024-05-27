@@ -12,6 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { modalsReducer } from "./modals/modalsSlice";
 
 const authPersistConfig = {
   key: "auth",
@@ -26,14 +27,26 @@ const booksPersistConfig = {
   whitelist: ["books", "library"],
 };
 
+const modalsPersistConfig = {
+  key: "modals",
+  storage,
+  whitelist: [],
+};
+
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 const persistedBooksReducer = persistReducer(booksPersistConfig, booksReducer);
+
+const persistedModalsReducer = persistReducer(
+  modalsPersistConfig,
+  modalsReducer
+);
 
 export const store = configureStore({
   reducer: {
     authSlice: persistedAuthReducer,
     booksSlice: persistedBooksReducer,
+    modalsSlice: persistedModalsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -10,9 +10,11 @@ import {
   UserWrpr,
 } from "./Header.styled";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/selectors";
+import { selectIsModalOpen, selectUser } from "../../redux/selectors";
+import Modal from "../Modal/Modal";
 
 const Header = () => {
+  const modalIsOpen = useSelector(selectIsModalOpen);
   const userData = useSelector(selectUser);
   return (
     <Container>
@@ -41,6 +43,7 @@ const Header = () => {
           <LogoutBtn>Log out</LogoutBtn>
         </UserWrpr>
       </HeaderWrpr>
+      {modalIsOpen && <Modal />}
     </Container>
   );
 };

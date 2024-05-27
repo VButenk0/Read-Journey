@@ -10,3 +10,12 @@ export const selectLibrary = (state) => state.booksSlice.library;
 export const selectSelectedItem = (state) => state.booksSlice.selectedItem;
 export const selectBookStat = (state) => state.booksSlice.bookStat;
 export const selectIsLoadingB = (state) => state.booksSlice.isLoading;
+
+export const selectIsModalOpen = (state) => state.modalsSlice.isModalOpen;
+export const selectAddToLibraryModal = (state) =>
+  state.modalsSlice.addToLibraryModal;
+export const selectStartReadingModal = (state) =>
+  state.modalsSlice.startReadingModal;
+export const selectAddedBookModal = (state) => state.modalsSlice.addedBookModal;
+export const selectreadedBookModal = (state) =>
+  state.modalsSlice.readedBookModal;

@@ -15,14 +15,19 @@ import {
 } from "../../redux/selectors";
 import { recommendBooksThunk } from "../../redux/books/operations";
 import {
+  changeSelectedItem,
   decrementRcmndPage,
   incrementRcmndPage,
 } from "../../redux/books/booksSlice";
+import {
+  changeAddToLibraryModal,
+  changeModalOpen,
+} from "../../redux/modals/modalsSlice";
 
 const RecommendedBooks = () => {
   const dispatch = useDispatch();
   const books = useSelector(selectBooks);
-  const totalPages = useSelector(selectTotalPages);
+  const totalPagesBooks = useSelector(selectTotalPages);
   const page = useSelector(selectPage);
   const [actualPage, setActualPage] = useState(page);
 
@@ -34,7 +39,7 @@ const RecommendedBooks = () => {
   };
 
   const onIncrementClick = () => {
-    if (actualPage < totalPages) {
+    if (actualPage < totalPagesBooks) {
       dispatch(incrementRcmndPage());
       setActualPage((prevPage) => prevPage + 1);
     }
@@ -56,7 +61,7 @@ const RecommendedBooks = () => {
             {"<"}
           </button>
           <button
-            className={page === totalPages ? "disable" : ""}
+            className={page === totalPagesBooks ? "disable" : ""}
             onClick={onIncrementClick}
           >
             {">"}
@@ -64,12 +69,14 @@ const RecommendedBooks = () => {
         </PaginationWrpr>
       </RcmndHeader>
       <BooksList>
-        {books.map(({ _id, title, author, imageUrl }) => (
+        {books.map(({ _id, title, author, imageUrl, totalPages }) => (
           <BookCard
             key={_id}
+            id={_id}
             title={title}
             author={author}
             imageUrl={imageUrl}
+            totalPages={totalPages}
           />
         ))}
       </BooksList>
