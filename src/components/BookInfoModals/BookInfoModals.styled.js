@@ -56,4 +56,14 @@ export const SubmitBtn = styled.button`
   font-size: 16px;
   line-height: 1.125;
   letter-spacing: 0.32px;
+
+  transition: all 0.3s;
+
+  &:hover,
+  &:active {
+    background-color: var(--white-bg);
+    border-color: transparent;
+
+    color: var(--black-text);
+  }
 `;

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+// import { Link } from "react-router-dom";
 
 export const RcmndPageWrpr = styled.div`
   display: flex;
@@ -7,148 +7,165 @@ export const RcmndPageWrpr = styled.div`
   width: 100%;
 `;
 
-export const FiltersWrpr = styled.div`
-  display: flex;
-  flex-direction: column;
+// export const FiltersWrpr = styled.div`
+//   display: flex;
+//   flex-direction: column;
 
-  p {
-    padding: 20px 0 8px 14px;
-  }
+//   p {
+//     padding: 20px 0 8px 14px;
+//   }
 
-  form:first-child {
-    margin-bottom: 8px;
-  }
-`;
+//   form:first-child {
+//     margin-bottom: 8px;
+//   }
+// `;
 
-export const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+// export const StyledForm = styled.form`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+// `;
 
-export const InputsWrpr = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
+// export const InputsWrpr = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 8px;
+// `;
 
-export const FilterInput = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 14px;
-  background-color: var(--addition-bg-color);
-  border-radius: 12px;
+// export const FilterInput = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+//   padding: 16px 14px;
+//   background-color: var(--addition-bg-color);
+//   border-radius: 12px;
 
-  label {
-    color: var(--secondary-text);
-    flex-shrink: 0;
-  }
+//   label {
+//     color: var(--secondary-text);
+//     flex-shrink: 0;
+//   }
 
-  input {
-    flex: 1;
-    color: var(--primary-text);
-  }
+//   input {
+//     flex: 1;
+//     color: var(--primary-text);
+//   }
 
-  input::placeholder {
-    color: var(--primary-text);
-  }
-`;
+//   input::placeholder {
+//     color: var(--primary-text);
+//   }
+// `;
 
-export const ToApplyBtn = styled.button`
-  padding: 12px 28px;
-  width: fit-content;
+// export const ToApplyBtn = styled.button`
+//   padding: 12px 28px;
+//   width: fit-content;
 
-  border: 1px solid var(--border-color);
-  border-radius: 30px;
+//   border: 1px solid var(--border-color);
+//   border-radius: 30px;
 
-  font-family: "Gilroy Bold";
-  font-size: 16px;
-  line-height: 1.125;
-  letter-spacing: 0.32px;
-`;
+//   font-family: "Gilroy Bold";
+//   font-size: 16px;
+//   line-height: 1.125;
+//   letter-spacing: 0.32px;
 
-export const InstructionWrpr = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+//   transition: all 0.3s;
 
-  background-color: var(--addition-bg-color);
-  border-radius: 12px;
+//   &:hover,
+//   &:active {
+//     background-color: var(--white-bg);
+//     border-color: transparent;
 
-  padding: 20px;
+//     color: var(--black-text);
+//   }
+// `;
 
-  h2 {
-    font-family: "Gilroy Bold";
-    font-size: 20px;
-    line-height: 1;
-    letter-spacing: -0.4px;
+// export const InstructionWrpr = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
 
-    padding-bottom: 20px;
-  }
-`;
+//   background-color: var(--addition-bg-color);
+//   border-radius: 12px;
 
-export const StepWrpr = styled.div`
-  display: flex;
-  gap: 12px;
+//   padding: 20px;
 
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+//   h2 {
+//     font-family: "Gilroy Bold";
+//     font-size: 20px;
+//     line-height: 1;
+//     letter-spacing: -0.4px;
 
-    width: 44px;
-    height: 44px;
+//     padding-bottom: 20px;
+//   }
+// `;
 
-    border-radius: 50%;
-    background-color: var(--white-bg);
+// export const StepWrpr = styled.div`
+//   display: flex;
+//   gap: 12px;
 
-    color: var(--black-text);
-    font-family: "Gilroy Bold";
-    font-size: 20px;
-    line-height: 1;
-    letter-spacing: -0.4px;
-  }
+//   div {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-shrink: 0;
 
-  p span {
-    color: var(--secondary-text);
-  }
-`;
+//     width: 44px;
+//     height: 44px;
 
-export const StyledLink = styled(Link)`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+//     border-radius: 50%;
+//     background-color: var(--white-bg);
 
-  p {
-    flex-shrink: 0;
-    color: var(--secondary-text);
-    text-decoration: underline;
-  }
-`;
+//     color: var(--black-text);
+//     font-family: "Gilroy Bold";
+//     font-size: 20px;
+//     line-height: 1;
+//     letter-spacing: -0.4px;
+//   }
 
-export const QuoteWrpr = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 14px;
+//   p span {
+//     color: var(--secondary-text);
+//   }
+// `;
 
-  padding: 14px 20px;
-  background-color: var(--addition-bg-color);
-  border-radius: 12px;
+// export const StyledLink = styled(Link)`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-end;
 
-  p:first-of-type {
-    flex-shrink: 0;
-    font-size: 40px;
-    line-height: 1;
-    letter-spacing: -0.8px;
-  }
+//   p {
+//     flex-shrink: 0;
+//     color: var(--secondary-text);
+//     text-decoration: underline;
+//     transition: all 0.3s;
+//   }
+//   &:hover,
+//   &:active {
+//     p {
+//       color: var(--primary-text);
+//     }
+//   }
+// `;
 
-  p {
-    color: var(--secondary-text);
+// export const QuoteWrpr = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 14px;
 
-    span {
-      color: var(--primary-text);
-    }
-  }
-`;
+//   padding: 14px 20px;
+//   background-color: var(--addition-bg-color);
+//   border-radius: 12px;
+
+//   p:first-of-type {
+//     flex-shrink: 0;
+//     font-size: 40px;
+//     line-height: 1;
+//     letter-spacing: -0.8px;
+//   }
+
+//   p {
+//     color: var(--secondary-text);
+
+//     span {
+//       color: var(--primary-text);
+//     }
+//   }
+// `;

@@ -139,6 +139,7 @@ export const SuccessMsg = styled.p`
 
 export const SubmitBtn = styled.button`
   padding: 16px 54px;
+  border: 1px solid transparent;
   border-radius: 30px;
   background-color: var(--white-bg);
   color: var(--black-text);
@@ -146,9 +147,25 @@ export const SubmitBtn = styled.button`
   font-size: 20px;
   line-height: 1;
   letter-spacing: 0.4px;
+
+  transition: all 0.3s;
+
+  &:hover,
+  &:active {
+    color: var(--primary-text);
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+  }
 `;
 
 export const RelocateLink = styled.a`
   color: var(--secondary-text);
   text-decoration: underline;
+
+  transition: all 0.3s;
+
+  &:hover,
+  &:active {
+    color: var(--primary-text);
+  }
 `;

@@ -57,15 +57,23 @@ export const booksSlice = createSlice({
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(addBookThunk.fulfilled, (state) => {
+      .addCase(addBookThunk.fulfilled, (state, { payload }) => {
+        state.library = [...state.library, payload];
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(addRcmndBookThunk.fulfilled, (state) => {
+      .addCase(addRcmndBookThunk.fulfilled, (state, { payload }) => {
+        state.library = [...state.library, payload];
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(deleteBookThunk.fulfilled, (state) => {
+      .addCase(deleteBookThunk.fulfilled, (state, { payload }) => {
+        state.library = [
+          ...state.library,
+          ...payload.filter(
+            (book) => !state.library.find((b) => b.id === book.id)
+          ),
+        ];
         state.isLoading = false;
         state.isError = null;
       })

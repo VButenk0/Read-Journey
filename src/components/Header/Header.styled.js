@@ -32,9 +32,6 @@ export const LogoWrpr = styled.div`
     letter-spacing: 0.36px;
     text-transform: uppercase;
   }
-
-  /* desktop */
-  /* padding-right: 344px; */
 `;
 
 export const UserNavWrpr = styled.div`
@@ -111,4 +108,14 @@ export const LogoutBtn = styled.button`
   font-size: 16px;
   line-height: 1.125;
   letter-spacing: 0.32px;
+
+  transition: all 0.3s;
+
+  &:hover,
+  &:active {
+    background-color: var(--white-bg);
+    border-color: transparent;
+
+    color: var(--black-text);
+  }
 `;

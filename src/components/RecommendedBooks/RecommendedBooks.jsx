@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import sprite from "../../assets/sprite.svg";
 import BookCard from "../BookCard/BookCard";
 import {
   BooksList,
@@ -15,14 +16,9 @@ import {
 } from "../../redux/selectors";
 import { recommendBooksThunk } from "../../redux/books/operations";
 import {
-  changeSelectedItem,
   decrementRcmndPage,
   incrementRcmndPage,
 } from "../../redux/books/booksSlice";
-import {
-  changeAddToLibraryModal,
-  changeModalOpen,
-} from "../../redux/modals/modalsSlice";
 
 const RecommendedBooks = () => {
   const dispatch = useDispatch();
@@ -58,13 +54,17 @@ const RecommendedBooks = () => {
             className={page === 1 ? "disable" : ""}
             onClick={onDecrementClick}
           >
-            {"<"}
+            <svg width="20" height="20">
+              <use href={sprite + "#chevron-left"}></use>
+            </svg>
           </button>
           <button
             className={page === totalPagesBooks ? "disable" : ""}
             onClick={onIncrementClick}
           >
-            {">"}
+            <svg width="20" height="20">
+              <use href={sprite + "#chevron-right"}></use>
+            </svg>
           </button>
         </PaginationWrpr>
       </RcmndHeader>

@@ -37,10 +37,35 @@ export const PaginationWrpr = styled.div`
 
     border-radius: 50%;
     border: 1px solid var(--border-color);
+
+    transition: all 0.3s;
+
+    svg use {
+      stroke: var(--primary-text);
+    }
+  }
+
+  button:hover,
+  button:active {
+    background-color: var(--white-bg);
+    border-color: transparent;
+
+    svg use {
+      stroke: var(--black-text);
+    }
   }
 
   button.disable {
-    color: var(--border-color);
+    cursor: default;
+    svg use {
+      stroke: var(--border-color);
+    }
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+    }
   }
 `;
 

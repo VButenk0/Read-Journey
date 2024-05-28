@@ -1,5 +1,7 @@
+import { LibraryWrpr } from "./MyLibraryBooks.styled";
+
 const MyLibraryBooks = () => {
-  return <div>MyLibraryBooks</div>;
+  return <LibraryWrpr>MyLibraryBooks</LibraryWrpr>;
 };
 
 export default MyLibraryBooks;
