@@ -9,13 +9,20 @@ import {
   UserNavWrpr,
   UserWrpr,
 } from "./Header.styled";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsModalOpen, selectUser } from "../../redux/selectors";
 import Modal from "../Modal/Modal";
+import { signoutThunk } from "../../redux/auth/operations";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const modalIsOpen = useSelector(selectIsModalOpen);
   const userData = useSelector(selectUser);
+
+  const handleLogout = () => {
+    dispatch(signoutThunk());
+  };
+
   return (
     <Container>
       <HeaderWrpr>
@@ -40,7 +47,7 @@ const Header = () => {
             <p>{userData.name}</p>
           </UserBarWrpr>
           {/* Logout */}
-          <LogoutBtn>Log out</LogoutBtn>
+          <LogoutBtn onClick={handleLogout}>Log out</LogoutBtn>
         </UserWrpr>
       </HeaderWrpr>
       {modalIsOpen && <Modal />}

@@ -117,8 +117,8 @@ const Dashboard = () => {
             {locationPage != "/recommended" && (
               <FilterInput>
                 <label htmlFor="page]">
-                  {(page === "/library" && "Number of pages:") ||
-                    (page === "/reading" && "Page number:")}
+                  {(locationPage === "/library" && "Number of pages:") ||
+                    (locationPage === "/reading" && "Page number:")}
                 </label>
                 <input
                   id="page"
@@ -134,14 +134,14 @@ const Dashboard = () => {
           <ToApplyBtn type="submit">To apply</ToApplyBtn>
         </StyledForm>
       </FiltersWrpr>
-      {page != "/reading" && (
+      {locationPage != "/reading" && (
         <InstructionWrpr>
-          {page === "/recommended" ? (
+          {locationPage === "/recommended" ? (
             <h2>Start your workout</h2>
           ) : (
             <h2>Recommended books</h2>
           )}
-          {page === "/recommended" ? (
+          {locationPage === "/recommended" ? (
             <>
               <StepWrpr>
                 <div>1</div>
@@ -177,16 +177,16 @@ const Dashboard = () => {
             </PreviewBooksWrpr>
           )}
           <StyledLink
-            to={page === "/recommended" ? "/library" : "/recommended"}
+            to={locationPage === "/recommended" ? "/library" : "/recommended"}
           >
-            {page === "/recommended" ? <p>My library</p> : <p>Home</p>}
+            {locationPage === "/recommended" ? <p>My library</p> : <p>Home</p>}
             <svg width="24" height="24">
               <use href={sprite + "#login"}></use>
             </svg>
           </StyledLink>
         </InstructionWrpr>
       )}
-      {page === "/recommended" && (
+      {locationPage === "/recommended" && (
         <QuoteWrpr>
           <p>&#128218;</p>
           <p>
