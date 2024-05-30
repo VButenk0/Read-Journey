@@ -99,23 +99,6 @@ export const booksSlice = createSlice({
         state.isLoading = false;
         state.isError = null;
       })
-      // .addMatcher(
-      //   (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
-      //   (state, { payload }) => {
-      //     if (recommendBooksThunk.fulfilled.match(payload)) {
-      //       state.books = payload.results;
-      //       state.totalPages = payload.totalPages;
-      //       state.page = payload.page;
-      //       state.perPage = payload.perPage;
-      //     } else if (getUserBooksThunk.fulfilled.match(payload)) {
-      //       state.library = payload;
-      //     } else if (getBookInfoThunk.fulfilled.match(payload)) {
-      //       state.bookStat = payload;
-      //     }
-      //     state.isLoading = false;
-      //     state.isError = null;
-      //   }
-      // )
       .addMatcher(
         (action) => thunks.some((thunk) => thunk.rejected.match(action)),
         (state, { payload }) => {

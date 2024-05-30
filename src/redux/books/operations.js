@@ -61,7 +61,7 @@ export const getUserBooksThunk = createAsyncThunk(
   "books/getOwned",
   async (status, thunkApi) => {
     try {
-      const { data } = await api.get("/books/own", status);
+      const { data } = await api.get(`/books/own?status=${status}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -95,9 +95,11 @@ export const finishReadingThunk = createAsyncThunk(
 
 export const deleteReadingThunk = createAsyncThunk(
   "books/deleteReading",
-  async (credentials, thunkApi) => {
+  async ({ bookId, readingId }, thunkApi) => {
     try {
-      const { data } = await api.delete("/books/reading", credentials);
+      const { data } = await api.delete(
+        `/books/reading?bookId=${bookId}&readingId=${readingId}`
+      );
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

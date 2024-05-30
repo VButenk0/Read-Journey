@@ -1,35 +1,39 @@
 import { useSelector } from "react-redux";
-import sprite from "../../assets/sprite.svg";
-import { LibraryWrpr } from "./MyLibraryBooks.styled";
 import { selectLibrary } from "../../redux/selectors";
+import {
+  BooksList,
+  LibHeader,
+  LibraryWrpr,
+  Title,
+} from "./MyLibraryBooks.styled";
+import BookCard from "../BookCard/BookCard";
 
 const MyLibraryBooks = () => {
   const library = useSelector(selectLibrary);
 
   return (
     <LibraryWrpr>
-      <h1>My library</h1>
-      <select name="status" id="status" defaultValue={"all"}>
-        <option value="unread">Unread</option>
-        <option value="in-progress">In progress</option>
-        <option value="done">Done</option>
-        <option value="all">All books</option>
-      </select>
-      {library.length ? (
-        <div>
-          {library.map(({ _id, imageUrl, title, author }) => {
-            <div key={_id}>
-              <img src={imageUrl} alt={title + "'s Cover"} />
-              <p>{title}</p>
-              <p>{author}</p>
-              <button>
-                <svg width="14" height="14">
-                  <use href={sprite + "#trash"}></use>
-                </svg>
-              </button>
-            </div>;
-          })}
-        </div>
+      <LibHeader>
+        <Title>My library</Title>
+        <select name="status" id="status" defaultValue={"all"}>
+          <option value="unread">Unread</option>
+          <option value="in-progress">In progress</option>
+          <option value="done">Done</option>
+          <option value="all">All books</option>
+        </select>
+      </LibHeader>
+      {library.length !== 0 ? (
+        <BooksList>
+          {library.map(({ _id, title, author, imageUrl }) => (
+            <BookCard
+              key={_id}
+              id={_id}
+              title={title}
+              author={author}
+              imageUrl={imageUrl}
+            />
+          ))}
+        </BooksList>
       ) : (
         <div>
           <p>&#128218;</p>
