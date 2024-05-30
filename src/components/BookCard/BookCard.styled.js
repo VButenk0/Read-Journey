@@ -25,6 +25,21 @@ export const BookWrpr = styled.div`
   }
 `;
 
+export const NoImgWrpr = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 137px;
+  height: 208px;
+
+  border: 1px solid var(--border10-color);
+  border-radius: 8px;
+
+  font-family: "Gilroy Bold";
+`;
+
 export const BookInfo = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../assets/sprite.svg";
 import BookCard from "../BookCard/BookCard";
-import {
-  BooksList,
-  PaginationWrpr,
-  RcmndBooksWrpr,
-  RcmndHeader,
-  Title,
-} from "./RecommendedBooks.styled";
-import { useDispatch, useSelector } from "react-redux";
 import {
   selectBooks,
   selectPage,
@@ -19,6 +12,13 @@ import {
   decrementRcmndPage,
   incrementRcmndPage,
 } from "../../redux/books/booksSlice";
+import {
+  BooksList,
+  PaginationWrpr,
+  RcmndBooksWrpr,
+  RcmndHeader,
+  Title,
+} from "./RecommendedBooks.styled";
 
 const RecommendedBooks = () => {
   const dispatch = useDispatch();

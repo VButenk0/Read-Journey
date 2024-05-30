@@ -61,7 +61,9 @@ export const getUserBooksThunk = createAsyncThunk(
   "books/getOwned",
   async (status, thunkApi) => {
     try {
-      const { data } = await api.get(`/books/own?status=${status}`);
+      const params = new URLSearchParams();
+      if (status) params.append("status", status);
+      const { data } = await api.get(`/books/own?${params.toString()}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

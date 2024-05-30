@@ -9,13 +9,16 @@ import PrivateRoute from "./routesConfig/PrivateRoute";
 import PublicRoute from "./routesConfig/PublicRoute";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { currentThunk } from "./redux/auth/operations";
+import { currentThunk, refreshThunk } from "./redux/auth/operations";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(currentThunk());
+    dispatch(currentThunk()).catch(() => {
+      dispatch(refreshThunk());
+      dispatch(currentThunk());
+    });
   }, [dispatch]);
 
   return (

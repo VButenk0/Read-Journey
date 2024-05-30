@@ -7,14 +7,6 @@ import {
   signupThunk,
 } from "./operations";
 
-const thunks = [
-  signupThunk,
-  signinThunk,
-  currentThunk,
-  refreshThunk,
-  signoutThunk,
-];
-
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -34,6 +26,8 @@ export const authSlice = createSlice({
         state.token = payload.token;
         state.refreshToken = payload.refreshToken;
         state.isLogged = true;
+        state.isLoading = false;
+        state.isError = null;
       })
       .addCase(signinThunk.fulfilled, (state, { payload }) => {
         state.user.email = payload.email;
@@ -41,6 +35,8 @@ export const authSlice = createSlice({
         state.token = payload.token;
         state.refreshToken = payload.refreshToken;
         state.isLogged = true;
+        state.isLoading = false;
+        state.isError = null;
       })
       .addCase(currentThunk.fulfilled, (state, { payload }) => {
         state.user.email = payload.email;
@@ -48,10 +44,14 @@ export const authSlice = createSlice({
         state.token = payload.token;
         state.refreshToken = payload.refreshToken;
         state.isLogged = true;
+        state.isLoading = false;
+        state.isError = null;
       })
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
         state.token = payload.token;
         state.refreshToken = payload.refreshToken;
+        state.isLoading = false;
+        state.isError = null;
       })
       .addCase(signoutThunk.fulfilled, (state) => {
         state.user.email = "";
@@ -59,55 +59,47 @@ export const authSlice = createSlice({
         state.token = "";
         state.refreshToken = "";
         state.isLogged = false;
+        state.isLoading = false;
+        state.isError = null;
       })
-      // .addMatcher(
-      //   (action) => thunks.some((thunk) => thunk.fulfilled.match(action)),
-      //   (state, { payload }) => {
-      //     if (
-      //       signupThunk.fulfilled.match(payload) ||
-      //       signinThunk.fulfilled.match(payload) ||
-      //       currentThunk.fulfilled.match(payload)
-      //     ) {
-      //       state.user.email = payload.email;
-      //       state.user.name = payload.name;
-      //       state.token = payload.token;
-      //       state.refreshToken = payload.refreshToken;
-      //       state.isLogged = true;
-      //     } else if (refreshThunk.fulfilled.match(payload)) {
-      //       state.token = payload.token;
-      //       state.refreshToken = payload.refreshToken;
-      //     } else if (signoutThunk.fulfilled.match(payload)) {
-      //       state.user.email = "";
-      //       state.user.name = "";
-      //       state.token = "";
-      //       state.refreshToken = "";
-      //       state.isLogged = false;
-      //     }
-      //     state.isLoading = false;
-      //     state.isError = null;
-      //   }
-      // )
-      .addMatcher(
-        (action) => thunks.some((thunk) => thunk.rejected.match(action)),
-        (state, { payload }) => {
-          state.isLoading = false;
-          state.isError = payload;
-          if (
-            signupThunk.rejected.match(payload) ||
-            signinThunk.rejected.match(payload) ||
-            currentThunk.rejected.match(payload)
-          ) {
-            state.isLogged = false;
-          }
-        }
-      )
-      .addMatcher(
-        (action) => thunks.some((thunk) => thunk.pending.match(action)),
-        (state) => {
-          state.isLoading = true;
-          state.isError = null;
-        }
-      );
+      .addCase(signupThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signinThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signoutThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(currentThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signupThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isLogged = false;
+        state.isError = payload;
+      })
+      .addCase(signinThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isLogged = false;
+        state.isError = payload;
+      })
+      .addCase(signoutThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = payload;
+      })
+      .addCase(currentThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isLogged = false;
+        state.isError = payload;
+      })
+      .addCase(refreshThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = payload;
+      });
   },
 });
 

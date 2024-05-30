@@ -45,6 +45,7 @@ export const FilterInput = styled.div`
   gap: 10px;
   padding: 16px 14px;
   background-color: var(--addition-bg-color);
+  border: 1px solid transparent;
   border-radius: 12px;
 
   label {
@@ -59,6 +60,11 @@ export const FilterInput = styled.div`
 
   input::placeholder {
     color: var(--primary-text);
+  }
+
+  &:hover,
+  &:active {
+    border-color: var(--border-color);
   }
 `;
 

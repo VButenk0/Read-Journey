@@ -13,6 +13,10 @@ import {
 import { selectPage } from "../../redux/selectors";
 import { selectBooks } from "../../redux/selectors";
 import {
+  changeAddedBookModal,
+  changeModalOpen,
+} from "../../redux/modals/modalsSlice";
+import {
   BookCard,
   BookInfo,
   DashboardStyled,
@@ -42,7 +46,7 @@ const Dashboard = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string(),
     author: Yup.string(),
-    page: Yup.number(),
+    totalPages: Yup.number(),
   });
 
   const {
@@ -73,7 +77,10 @@ const Dashboard = () => {
       const reqBody = { ...data, page, limit };
       dispatch(recommendBooksThunk(reqBody));
     } else if (locationPage === "/library") {
-      dispatch(addBookThunk(data));
+      dispatch(addBookThunk(data)).then(() => {
+        dispatch(changeModalOpen(true));
+        dispatch(changeAddedBookModal(true));
+      });
     } else {
       // ADD ID OF READING BOOK
       dispatch(startReadingThunk(data));
@@ -116,16 +123,16 @@ const Dashboard = () => {
             )}
             {locationPage != "/recommended" && (
               <FilterInput>
-                <label htmlFor="page]">
+                <label htmlFor="totalPages">
                   {(locationPage === "/library" && "Number of pages:") ||
                     (locationPage === "/reading" && "Page number:")}
                 </label>
                 <input
-                  id="page"
-                  name="page"
+                  id="totalPages"
+                  name="totalPages"
                   type="text"
                   placeholder="Enter text"
-                  {...register("page")}
+                  {...register("totalPages")}
                 />
                 {errors.page && <p>{errors.page.message}</p>}
               </FilterInput>

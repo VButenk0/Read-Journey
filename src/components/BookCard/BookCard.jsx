@@ -12,9 +12,13 @@ import {
   BookWrpr,
   DeleteBtn,
   LibBookInfo,
+  NoImgWrpr,
   TextBtnWrpr,
 } from "./BookCard.styled";
-import { deleteBookThunk } from "../../redux/books/operations";
+import {
+  deleteBookThunk,
+  getUserBooksThunk,
+} from "../../redux/books/operations";
 
 const BookCard = ({ id, title, author, imageUrl, totalPages }) => {
   const dispatch = useDispatch();
@@ -32,11 +36,29 @@ const BookCard = ({ id, title, author, imageUrl, totalPages }) => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteBookThunk(id));
+    dispatch(deleteBookThunk(id))
+      .then(() => dispatch(getUserBooksThunk()))
+      .catch((error) => console.log(error.message));
   };
+
   return (
-    <BookWrpr onClick={handleBookInfo}>
-      <img src={imageUrl} alt={title + "'s Cover"} width={137} height={208} />
+    <BookWrpr>
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={title + "'s Cover"}
+          width={137}
+          height={208}
+          onClick={handleBookInfo}
+        />
+      ) : (
+        <NoImgWrpr>
+          <svg width="50" height="50" stroke="var(--primary-text)">
+            <use href={sprite + "#no-image"}></use>
+          </svg>
+          <p>No cover</p>
+        </NoImgWrpr>
+      )}
       {page === "/recommended" ? (
         <BookInfo>
           <p>{title}</p>

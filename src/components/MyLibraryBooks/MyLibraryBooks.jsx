@@ -4,6 +4,8 @@ import {
   BooksList,
   LibHeader,
   LibraryWrpr,
+  NoBooksWrpr,
+  StyledSelect,
   Title,
 } from "./MyLibraryBooks.styled";
 import BookCard from "../BookCard/BookCard";
@@ -15,12 +17,12 @@ const MyLibraryBooks = () => {
     <LibraryWrpr>
       <LibHeader>
         <Title>My library</Title>
-        <select name="status" id="status" defaultValue={"all"}>
+        <StyledSelect name="status" id="status" defaultValue={"all"}>
           <option value="unread">Unread</option>
           <option value="in-progress">In progress</option>
           <option value="done">Done</option>
           <option value="all">All books</option>
-        </select>
+        </StyledSelect>
       </LibHeader>
       {library.length !== 0 ? (
         <BooksList>
@@ -35,13 +37,13 @@ const MyLibraryBooks = () => {
           ))}
         </BooksList>
       ) : (
-        <div>
+        <NoBooksWrpr>
           <p>&#128218;</p>
           <p>
             To start training, add <span>some of your books</span> or from the
             recommended ones
           </p>
-        </div>
+        </NoBooksWrpr>
       )}
     </LibraryWrpr>
   );

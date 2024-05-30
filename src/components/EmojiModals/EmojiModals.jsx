@@ -1,5 +1,35 @@
+import { useLocation } from "react-router-dom";
+import { Emoji, EmojiModalWrpr, MainText, Title } from "./EmojiModals.styled";
+
 const EmojiModals = () => {
-  return <div>EmojiModals</div>;
+  const location = useLocation();
+  const page = location.pathname;
+
+  return (
+    <EmojiModalWrpr>
+      {page === "/library" ? (
+        <Emoji>&#128077;</Emoji>
+      ) : (
+        <Emoji>&#128218;</Emoji>
+      )}
+      {page === "/library" ? (
+        <Title>Good job</Title>
+      ) : (
+        <Title>The book is read</Title>
+      )}
+      {page === "/library" ? (
+        <MainText>
+          Your book is now in <span>the library!</span> The joy knows no bounds
+          and now you can start your training
+        </MainText>
+      ) : (
+        <p>
+          It was an <span>exciting journey</span>, where each page revealed new
+          horizons, and the characters became inseparable friends.
+        </p>
+      )}
+    </EmojiModalWrpr>
+  );
 };
 
 export default EmojiModals;
