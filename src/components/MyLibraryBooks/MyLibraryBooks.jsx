@@ -9,24 +9,40 @@ import {
   Title,
 } from "./MyLibraryBooks.styled";
 import BookCard from "../BookCard/BookCard";
+import { useState } from "react";
 
 const MyLibraryBooks = () => {
+  const [filter, setFilter] = useState("all");
   const library = useSelector(selectLibrary);
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const filteredLibrary =
+    filter === "all"
+      ? library
+      : library.filter((book) => book.status === filter);
 
   return (
     <LibraryWrpr>
       <LibHeader>
         <Title>My library</Title>
-        <StyledSelect name="status" id="status" defaultValue={"all"}>
+        <StyledSelect
+          name="status"
+          id="status"
+          value={filter}
+          onChange={handleFilterChange}
+        >
           <option value="unread">Unread</option>
           <option value="in-progress">In progress</option>
           <option value="done">Done</option>
           <option value="all">All books</option>
         </StyledSelect>
       </LibHeader>
-      {library.length !== 0 ? (
+      {filteredLibrary.length !== 0 ? (
         <BooksList>
-          {library.map(({ _id, title, author, imageUrl }) => (
+          {filteredLibrary.map(({ _id, title, author, imageUrl }) => (
             <BookCard
               key={_id}
               id={_id}

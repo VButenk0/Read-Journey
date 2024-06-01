@@ -8,11 +8,15 @@ import ReadingPage from "./pages/ReadingPage/ReadingPage";
 import PrivateRoute from "./routesConfig/PrivateRoute";
 import PublicRoute from "./routesConfig/PublicRoute";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { currentThunk, refreshThunk } from "./redux/auth/operations";
+import Loader from "./components/Loader/Loader";
+import { selectIsLoading, selectIsLoadingB } from "./redux/selectors";
 
 function App() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const isLoadingB = useSelector(selectIsLoadingB);
 
   useEffect(() => {
     dispatch(currentThunk()).catch(() => {
@@ -23,6 +27,7 @@ function App() {
 
   return (
     <>
+      {(isLoading || isLoadingB) && <Loader />}
       <Routes>
         <Route
           path="/register"
