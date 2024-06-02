@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import sprite from "../../assets/sprite.svg";
 import {
   selectAddToLibraryModal,
   selectSelectedItem,
@@ -9,9 +10,12 @@ import {
 } from "../../redux/books/operations";
 import { AllInfoWrpr, SubmitBtn, TextInfoWrpr } from "./BookInfoModals.styled";
 import { closeModals } from "../../redux/modals/modalsSlice";
+import { NoImgWrpr } from "../BookCard/BookCard.styled";
+import { useNavigate } from "react-router-dom";
 
 const BookInfoModals = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const addToLibraryModal = useSelector(selectAddToLibraryModal);
   const selectedBook = useSelector(selectSelectedItem);
   const { id, title, author, imageUrl, totalPages } = selectedBook;
@@ -27,13 +31,22 @@ const BookInfoModals = () => {
   };
 
   const startReading = () => {
-    let page = 1;
-    dispatch(startReadingThunk(id, page));
+    dispatch(closeModals());
+    navigate("/reading");
   };
 
   return (
     <AllInfoWrpr>
-      <img src={imageUrl} alt={title + "'s Cover"} width={153} height={233} />
+      {imageUrl ? (
+        <img src={imageUrl} alt={title + "'s Cover"} width={153} height={233} />
+      ) : (
+        <NoImgWrpr>
+          <svg width="50" height="50" stroke="var(--primary-text)">
+            <use href={sprite + "#no-image"}></use>
+          </svg>
+          <p>No cover</p>
+        </NoImgWrpr>
+      )}
       <TextInfoWrpr>
         <p>{title}</p>
         <p>{author}</p>

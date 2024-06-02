@@ -52,7 +52,7 @@ const BookCard = ({ id, title, author, imageUrl, totalPages }) => {
           onClick={handleBookInfo}
         />
       ) : (
-        <NoImgWrpr>
+        <NoImgWrpr onClick={handleBookInfo}>
           <svg width="50" height="50" stroke="var(--primary-text)">
             <use href={sprite + "#no-image"}></use>
           </svg>

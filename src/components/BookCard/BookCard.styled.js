@@ -4,24 +4,24 @@ export const BookWrpr = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  padding: 10px;
-  border: 1px solid transparent;
+  width: 137px;
+  height: 248px;
 
   cursor: pointer;
-
-  transition: all 0.3s;
 
   img {
     width: 137px;
     height: 208px;
     border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.3s;
   }
 
   &:hover,
   &:active {
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    img {
+      border: 1px solid var(--hover-border);
+    }
   }
 `;
 
@@ -38,6 +38,13 @@ export const NoImgWrpr = styled.div`
   border-radius: 8px;
 
   font-family: "Gilroy Bold";
+
+  transition: all 0.3s;
+
+  &:hover,
+  &:active {
+    border: 1px solid var(--hover-border);
+  }
 `;
 
 export const BookInfo = styled.div`
@@ -64,7 +71,6 @@ export const BookInfo = styled.div`
 
 export const TextBtnWrpr = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 20px;
 `;

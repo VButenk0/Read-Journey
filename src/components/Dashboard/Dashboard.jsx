@@ -30,6 +30,7 @@ import {
   StyledForm,
   StyledLink,
   ToApplyBtn,
+  ProgressWrpr,
 } from "./Dashboard.styled";
 
 const Dashboard = () => {
@@ -195,12 +196,22 @@ const Dashboard = () => {
       )}
       {locationPage === "/recommended" && (
         <QuoteWrpr>
-          <p>&#128218;</p>
+          <p>📚</p>
           <p>
             &quot;Books are <span>windows</span> to the world, and reading is a
             journey into the unknown.&quot;
           </p>
         </QuoteWrpr>
+      )}
+      {locationPage === "/reading" && (
+        <ProgressWrpr>
+          <h2>Progress</h2>
+          <p>
+            Here you will see when and how much you read. To record, click on
+            the red button above.
+          </p>
+          <p>🌟</p>
+        </ProgressWrpr>
       )}
     </DashboardStyled>
   );

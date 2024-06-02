@@ -4,7 +4,7 @@ export const RcmndBooksWrpr = styled.div`
   width: 847px;
   height: 651px;
 
-  padding: 40px;
+  padding: 40px 42px 28px 40px;
   background-color: var(--bg-color);
   border-radius: 30px;
 `;
@@ -73,5 +73,6 @@ export const BooksList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr 1fr;
-  row-gap: 7px;
+  row-gap: 27px;
+  column-gap: 20px;
 `;

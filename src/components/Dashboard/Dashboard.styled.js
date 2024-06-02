@@ -226,3 +226,44 @@ export const QuoteWrpr = styled.div`
     }
   }
 `;
+
+export const ProgressWrpr = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  padding-top: 40px;
+
+  h2 {
+    font-family: "Gilroy Bold";
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.4px;
+
+    padding-bottom: 14px;
+  }
+
+  p:first-of-type {
+    color: var(--secondary-text);
+
+    padding-bottom: 60px;
+  }
+
+  p:last-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--addition-bg-color);
+    flex-shrink: 0;
+
+    font-size: 50px;
+    line-height: 1.4;
+    letter-spacing: -1px;
+  }
+`;

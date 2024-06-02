@@ -42,15 +42,18 @@ const MyLibraryBooks = () => {
       </LibHeader>
       {filteredLibrary.length !== 0 ? (
         <BooksList>
-          {filteredLibrary.map(({ _id, title, author, imageUrl }) => (
-            <BookCard
-              key={_id}
-              id={_id}
-              title={title}
-              author={author}
-              imageUrl={imageUrl}
-            />
-          ))}
+          {filteredLibrary.map(
+            ({ _id, title, author, imageUrl, totalPages }) => (
+              <BookCard
+                key={_id}
+                id={_id}
+                title={title}
+                author={author}
+                imageUrl={imageUrl}
+                totalPages={totalPages}
+              />
+            )
+          )}
         </BooksList>
       ) : (
         <NoBooksWrpr>

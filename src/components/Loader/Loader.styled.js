@@ -16,7 +16,7 @@ export const LoaderWrpr = styled.div`
 export const StyledLoader = styled.span`
   width: 200px;
   height: 140px;
-  background: var(--active-page-line);
+  background: var(--white-bg);
   box-sizing: border-box;
   position: relative;
   border-radius: 8px;
@@ -30,7 +30,7 @@ export const StyledLoader = styled.span`
     top: 10px;
     bottom: 10px;
     border-radius: 8px;
-    background: #f5f5f5 no-repeat;
+    background: var(--bg-color) no-repeat;
     background-size: 60px 10px;
     background-image: linear-gradient(
         var(--active-page-line) 100px,
@@ -54,7 +54,7 @@ export const StyledLoader = styled.span`
     top: 10px;
     bottom: 10px;
     border-radius: 8px;
-    background: #fff no-repeat;
+    background: var(--addition-bg-color) no-repeat;
     background-size: 60px 10px;
     background-image: linear-gradient(
         var(--active-page-line) 100px,

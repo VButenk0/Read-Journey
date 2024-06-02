@@ -7,11 +7,7 @@ const EmojiModals = () => {
 
   return (
     <EmojiModalWrpr>
-      {page === "/library" ? (
-        <Emoji>&#128077;</Emoji>
-      ) : (
-        <Emoji>&#128218;</Emoji>
-      )}
+      {page === "/library" ? <Emoji>👍</Emoji> : <Emoji>📚</Emoji>}
       {page === "/library" ? (
         <Title>Good job</Title>
       ) : (
