@@ -7,10 +7,11 @@ import * as Yup from "yup";
 import sprite from "../../assets/sprite.svg";
 import {
   addBookThunk,
+  getBookInfoThunk,
   recommendBooksThunk,
   startReadingThunk,
 } from "../../redux/books/operations";
-import { selectPage } from "../../redux/selectors";
+import { selectPage, selectSelectedItem } from "../../redux/selectors";
 import { selectBooks } from "../../redux/selectors";
 import {
   changeAddedBookModal,
@@ -32,6 +33,7 @@ import {
   ToApplyBtn,
   ProgressWrpr,
 } from "./Dashboard.styled";
+import { useState } from "react";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -43,6 +45,17 @@ const Dashboard = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1439 });
   // const isDesktop = useMediaQuery({ minWidth: 1440 });
+
+  const selectedItem = useSelector(selectSelectedItem);
+  const bookInfo = () => {
+    const id = selectedItem.id;
+    const info = dispatch(getBookInfoThunk(id));
+    return info;
+  };
+  const status = selectedItem.status;
+  const isReading = status !== "unread";
+  const isReaded = status === "done";
+  const [mode, setMode] = useState("Diary");
 
   const validationSchema = Yup.object().shape({
     title: Yup.string(),
@@ -86,6 +99,16 @@ const Dashboard = () => {
       // ADD ID OF READING BOOK
       dispatch(startReadingThunk(data));
     }
+  };
+
+  const toggleMode = () => {
+    setMode((prevState) => {
+      if (prevState === "Diary") {
+        prevState = "Statistics";
+      } else {
+        prevState = "Diary";
+      }
+    });
   };
 
   return (
@@ -205,12 +228,58 @@ const Dashboard = () => {
       )}
       {locationPage === "/reading" && (
         <ProgressWrpr>
-          <h2>Progress</h2>
-          <p>
-            Here you will see when and how much you read. To record, click on
-            the red button above.
-          </p>
-          <p>🌟</p>
+          <h2>
+            {(!isReading && "Progress") || mode === "Diary" ? (
+              <div>
+                <h2>Diary</h2>
+                <div>
+                  <svg width="20" height="20" onClick={toggleMode}>
+                    <use href={sprite + "#hourglass"}></use>
+                  </svg>
+                  <svg width="20" height="20" onClick={toggleMode}>
+                    <use href={sprite + "#pie-chart"}></use>
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <h2>Statistics</h2>
+                <div>
+                  <svg width="20" height="20" onClick={toggleMode}>
+                    <use href={sprite + "#hourglass"}></use>
+                  </svg>
+                  <svg width="20" height="20" onClick={toggleMode}>
+                    <use href={sprite + "#pie-chart"}></use>
+                  </svg>
+                </div>
+              </div>
+            )}
+          </h2>
+          {(!isReading && (
+            <>
+              <p>
+                Here you will see when and how much you read. To record, click
+                on the red button above.
+              </p>
+              <p>🌟</p>
+            </>
+          )) ||
+          mode === "Diary" ? (
+            <div>??.??.???? ??pages</div>
+          ) : (
+            <div>
+              <p>
+                Each page, each chapter is a new round of knowledge, a new step
+                towards understanding. By rewriting statistics, we create our
+                own reading history.
+              </p>
+              <div>
+                <div>%</div>
+                <p>%</p>
+                <p>pages read</p>
+              </div>
+            </div>
+          )}
         </ProgressWrpr>
       )}
     </DashboardStyled>

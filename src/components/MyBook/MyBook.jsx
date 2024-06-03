@@ -1,16 +1,24 @@
 import { useSelector } from "react-redux";
 import sprite from "../../assets/sprite.svg";
 import { selectSelectedItem } from "../../redux/selectors";
-import { ReadingWrpr, Title } from "./MyBook.styled";
+import {
+  BookWrpr,
+  MyBookDscr,
+  NoImgMyBook,
+  ReadingWrpr,
+  Title,
+} from "./MyBook.styled";
 
 const MyBook = () => {
   const selectedBook = useSelector(selectSelectedItem);
-  const { title, author, imageUrl } = selectedBook;
+  const { title, author, imageUrl, status } = selectedBook;
+
+  const inProgress = status === "in-progress";
 
   return (
     <ReadingWrpr>
       <Title>My reading</Title>
-      <div>
+      <BookWrpr>
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -19,27 +27,27 @@ const MyBook = () => {
             height={340}
           />
         ) : (
-          <div>
+          <NoImgMyBook>
             <svg width="100" height="100" stroke="var(--primary-text)">
               <use href={sprite + "#no-image"}></use>
             </svg>
             <p>No cover</p>
-          </div>
+          </NoImgMyBook>
         )}
-        <div>
+        <MyBookDscr>
           <p>{title}</p>
           <p>{author}</p>
-        </div>
-        {selectedBook ? (
-          <svg width="24" height="24">
+        </MyBookDscr>
+        {!inProgress ? (
+          <svg width="50" height="50">
             <use href={sprite + "#start-rec"}></use>
           </svg>
         ) : (
-          <svg width="24" height="24">
+          <svg width="50" height="50">
             <use href={sprite + "#stop-rec"}></use>
           </svg>
         )}
-      </div>
+      </BookWrpr>
     </ReadingWrpr>
   );
 };
