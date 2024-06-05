@@ -32,7 +32,6 @@ export const booksSlice = createSlice({
     perPage: 0,
     library: [],
     selectedItem: {},
-    bookStat: {},
     isLoading: false,
     isError: null,
   },
@@ -59,11 +58,13 @@ export const booksSlice = createSlice({
       })
       .addCase(addBookThunk.fulfilled, (state, { payload }) => {
         state.library = [...state.library, payload];
+        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
       .addCase(addRcmndBookThunk.fulfilled, (state, { payload }) => {
         state.library = [...state.library, payload];
+        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
@@ -82,20 +83,23 @@ export const booksSlice = createSlice({
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(startReadingThunk.fulfilled, (state) => {
+      .addCase(startReadingThunk.fulfilled, (state, { payload }) => {
+        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(finishReadingThunk.fulfilled, (state) => {
+      .addCase(finishReadingThunk.fulfilled, (state, { payload }) => {
+        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(deleteReadingThunk.fulfilled, (state) => {
+      .addCase(deleteReadingThunk.fulfilled, (state, { payload }) => {
+        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
       .addCase(getBookInfoThunk.fulfilled, (state, { payload }) => {
-        state.bookStat = payload;
+        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })

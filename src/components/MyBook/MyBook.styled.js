@@ -71,3 +71,7 @@ export const MyBookDscr = styled.div`
     color: var(--secondary-text);
   }
 `;
+
+export const RecStopIcon = styled.svg`
+  cursor: pointer;
+`;

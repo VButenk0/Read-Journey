@@ -20,13 +20,15 @@ import {
   getUserBooksThunk,
 } from "../../redux/books/operations";
 
-const BookCard = ({ id, title, author, imageUrl, totalPages }) => {
+const BookCard = ({ id, title, author, imageUrl, totalPages, status }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const page = location.pathname;
 
   const handleBookInfo = () => {
-    dispatch(changeSelectedItem({ id, title, author, imageUrl, totalPages }));
+    dispatch(
+      changeSelectedItem({ id, title, author, imageUrl, totalPages, status })
+    );
     dispatch(changeModalOpen(true));
     if (page === "/recommended") {
       dispatch(changeAddToLibraryModal(true));
@@ -36,9 +38,7 @@ const BookCard = ({ id, title, author, imageUrl, totalPages }) => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteBookThunk(id))
-      .then(() => dispatch(getUserBooksThunk()))
-      .catch((error) => console.log(error.message));
+    dispatch(deleteBookThunk(id));
   };
 
   return (

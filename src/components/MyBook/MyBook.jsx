@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import sprite from "../../assets/sprite.svg";
 import { selectSelectedItem } from "../../redux/selectors";
 import {
@@ -6,14 +6,21 @@ import {
   MyBookDscr,
   NoImgMyBook,
   ReadingWrpr,
+  RecStopIcon,
   Title,
 } from "./MyBook.styled";
+import { startReadingThunk } from "../../redux/books/operations";
 
 const MyBook = () => {
+  const dispatch = useDispatch();
   const selectedBook = useSelector(selectSelectedItem);
-  const { title, author, imageUrl, status } = selectedBook;
+  const { id, title, author, imageUrl, status } = selectedBook;
 
   const inProgress = status === "in-progress";
+
+  const handleStart = () => {
+    dispatch(startReadingThunk(id));
+  };
 
   return (
     <ReadingWrpr>
@@ -38,15 +45,13 @@ const MyBook = () => {
           <p>{title}</p>
           <p>{author}</p>
         </MyBookDscr>
-        {!inProgress ? (
-          <svg width="50" height="50">
+        <RecStopIcon width="50" height="50" onClick={handleStart}>
+          {!inProgress ? (
             <use href={sprite + "#start-rec"}></use>
-          </svg>
-        ) : (
-          <svg width="50" height="50">
+          ) : (
             <use href={sprite + "#stop-rec"}></use>
-          </svg>
-        )}
+          )}
+        </RecStopIcon>
       </BookWrpr>
     </ReadingWrpr>
   );

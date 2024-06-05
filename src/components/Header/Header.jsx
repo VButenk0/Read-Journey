@@ -27,7 +27,7 @@ const Header = () => {
     <Container>
       <HeaderWrpr>
         {/* Logo */}
-        <LogoWrpr>
+        <LogoWrpr to={"/recommended"}>
           <svg width={42} height={17}>
             <use href={sprite + "#Logo"}></use>
           </svg>

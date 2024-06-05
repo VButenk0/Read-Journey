@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderWrpr = styled.div`
@@ -19,7 +19,7 @@ export const HeaderWrpr = styled.div`
   }
 `;
 
-export const LogoWrpr = styled.div`
+export const LogoWrpr = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -233,37 +233,146 @@ export const ProgressWrpr = styled.div`
   flex: 1;
 
   padding-top: 40px;
+`;
+
+export const ProgrDscrText = styled.p`
+  color: var(--secondary-text);
+
+  padding-bottom: 60px;
+`;
+
+export const StarIcon = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 auto;
+
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--addition-bg-color);
+  flex-shrink: 0;
+
+  font-size: 50px;
+  line-height: 1.4;
+  letter-spacing: -1px;
+`;
+
+export const ProgressTitle = styled.h2`
+  font-family: "Gilroy Bold";
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.4px;
+
+  padding-bottom: 14px;
+`;
+
+export const StatNTitleWrpr = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: 14px;
 
   h2 {
     font-family: "Gilroy Bold";
     font-size: 20px;
     line-height: 1;
     letter-spacing: -0.4px;
-
-    padding-bottom: 14px;
   }
+`;
+
+export const StatIconWrpr = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const StatIcon = styled.svg`
+  stroke: var(--secondary-text);
+  cursor: pointer;
+
+  &.active {
+    stroke: var(--primary-text);
+  }
+`;
+
+export const StatisticsWrpr = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  p:first-child {
+    color: var(--secondary-text);
+  }
+`;
+
+export const ReadedStatWrpr = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  background-color: var(--addition-bg-color);
+
+  padding: 20px;
+`;
+
+export const DoughnutWrpr = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 189px;
+  height: 189px;
+
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 24px;
+    font-family: "Gilroy Bold";
+    color: var(--primary-text);
+  }
+  canvas {
+    width: 378px !important;
+    height: 189px !important;
+
+    padding: 10px;
+  }
+`;
+
+export const StatBottomWrpr = styled.div`
+  display: flex;
+  gap: 15px;
+
+  padding-top: 10px;
+
+  span {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background-color: var(--green);
+  }
+`;
+
+export const StatTextWrpr = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   p:first-of-type {
-    color: var(--secondary-text);
-
-    padding-bottom: 60px;
+    color: var(--primary-text);
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.4px;
   }
-
   p:last-of-type {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0 auto;
-
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: var(--addition-bg-color);
-    flex-shrink: 0;
-
-    font-size: 50px;
-    line-height: 1.4;
-    letter-spacing: -1px;
+    color: var(--secondary-text);
+    font-size: 12px;
+    line-height: 1.167;
+    letter-spacing: -0.24px;
   }
 `;
