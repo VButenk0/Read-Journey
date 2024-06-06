@@ -29,6 +29,7 @@ export const MainText = styled.p`
   text-align: center;
 
   width: 242px;
+  text-align: center;
 
   span {
     color: var(--primary-text);

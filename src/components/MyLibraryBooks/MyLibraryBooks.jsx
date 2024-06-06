@@ -1,4 +1,6 @@
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import BookCard from "../BookCard/BookCard";
 import { selectLibrary } from "../../redux/selectors";
 import {
   BooksList,
@@ -8,10 +10,10 @@ import {
   StyledSelect,
   Title,
 } from "./MyLibraryBooks.styled";
-import BookCard from "../BookCard/BookCard";
-import { useState } from "react";
+import { getUserBooksThunk } from "../../redux/books/operations";
 
 const MyLibraryBooks = () => {
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState("all");
   const library = useSelector(selectLibrary);
 
@@ -23,6 +25,13 @@ const MyLibraryBooks = () => {
     filter === "all"
       ? library
       : library.filter((book) => book.status === filter);
+
+  useEffect(() => {
+    if (filter !== "all") {
+      dispatch(getUserBooksThunk(filter));
+    }
+    dispatch(getUserBooksThunk());
+  }, [dispatch, filter]);
 
   return (
     <LibraryWrpr>
@@ -43,7 +52,15 @@ const MyLibraryBooks = () => {
       {filteredLibrary.length !== 0 ? (
         <BooksList>
           {filteredLibrary.map(
-            ({ _id, title, author, imageUrl, totalPages }) => (
+            ({
+              _id,
+              title,
+              author,
+              imageUrl,
+              totalPages,
+              status,
+              progress,
+            }) => (
               <BookCard
                 key={_id}
                 id={_id}
@@ -51,6 +68,8 @@ const MyLibraryBooks = () => {
                 author={author}
                 imageUrl={imageUrl}
                 totalPages={totalPages}
+                status={status}
+                progress={progress}
               />
             )
           )}

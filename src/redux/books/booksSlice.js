@@ -69,12 +69,7 @@ export const booksSlice = createSlice({
         state.isError = null;
       })
       .addCase(deleteBookThunk.fulfilled, (state, { payload }) => {
-        state.library = [
-          ...state.library,
-          ...payload.filter(
-            (book) => !state.library.find((b) => b.id === book.id)
-          ),
-        ];
+        state.library = state.library.filter((book) => book._id !== payload.id);
         state.isLoading = false;
         state.isError = null;
       })
@@ -84,17 +79,28 @@ export const booksSlice = createSlice({
         state.isError = null;
       })
       .addCase(startReadingThunk.fulfilled, (state, { payload }) => {
+        const index = state.library.findIndex(
+          (book) => book._id === payload._id
+        );
+        if (index !== -1) {
+          state.library[index] = payload;
+        }
         state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
       .addCase(finishReadingThunk.fulfilled, (state, { payload }) => {
+        const index = state.library.findIndex(
+          (book) => book._id === payload._id
+        );
+        if (index !== -1) {
+          state.library[index] = payload;
+        }
         state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })
       .addCase(deleteReadingThunk.fulfilled, (state, { payload }) => {
-        state.selectedItem = payload;
         state.isLoading = false;
         state.isError = null;
       })

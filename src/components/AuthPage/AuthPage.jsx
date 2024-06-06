@@ -21,12 +21,12 @@ import {
   SuccessMsg,
 } from "./AuthPage.styled";
 import { useNavigate } from "react-router-dom";
-import { selectIsLogged } from "../../redux/selectors";
+import { selectUser } from "../../redux/selectors";
 
 const AuthForm = ({ mode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogged = useSelector(selectIsLogged);
+  const user = useSelector(selectUser);
   const [showPassword, setShowPassword] = useState(false);
   const isLogin = mode === "login";
 
@@ -65,13 +65,13 @@ const AuthForm = ({ mode }) => {
   const onSubmit = (data) => {
     console.log(data);
     if (isLogin) {
-      dispatch(signinThunk(data)).then((res) => {
-        console.log(`Welcome back, ${res.name}!`);
+      dispatch(signinThunk(data)).then(() => {
+        console.log(`Welcome back, ${user.name}!`);
         navigate("/recommended");
       });
     } else {
-      dispatch(signupThunk(data)).then((res) => {
-        console.log(`Welcome, ${res.name}!`);
+      dispatch(signupThunk(data)).then(() => {
+        console.log(`Welcome, ${user.name}!`);
         navigate("/recommended");
       });
     }

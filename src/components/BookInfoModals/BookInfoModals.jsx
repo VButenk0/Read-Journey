@@ -6,6 +6,7 @@ import {
 } from "../../redux/selectors";
 import {
   addRcmndBookThunk,
+  getBookInfoThunk,
   startReadingThunk,
 } from "../../redux/books/operations";
 import { AllInfoWrpr, SubmitBtn, TextInfoWrpr } from "./BookInfoModals.styled";

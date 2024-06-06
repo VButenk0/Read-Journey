@@ -9,18 +9,12 @@ import {
   RecStopIcon,
   Title,
 } from "./MyBook.styled";
-import { startReadingThunk } from "../../redux/books/operations";
 
 const MyBook = () => {
-  const dispatch = useDispatch();
   const selectedBook = useSelector(selectSelectedItem);
-  const { id, title, author, imageUrl, status } = selectedBook;
+  const { title, author, imageUrl, progress } = selectedBook;
 
-  const inProgress = status === "in-progress";
-
-  const handleStart = () => {
-    dispatch(startReadingThunk(id));
-  };
+  const isActive = progress.some((p) => p.status === "active");
 
   return (
     <ReadingWrpr>
@@ -45,8 +39,8 @@ const MyBook = () => {
           <p>{title}</p>
           <p>{author}</p>
         </MyBookDscr>
-        <RecStopIcon width="50" height="50" onClick={handleStart}>
-          {!inProgress ? (
+        <RecStopIcon width="50" height="50">
+          {!isActive ? (
             <use href={sprite + "#start-rec"}></use>
           ) : (
             <use href={sprite + "#stop-rec"}></use>

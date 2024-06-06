@@ -141,7 +141,6 @@ export const StepWrpr = styled.div`
 
 export const PreviewBooksWrpr = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 20px;
 `;
@@ -312,6 +311,7 @@ export const ReadedStatWrpr = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
   border-radius: 12px;
   background-color: var(--addition-bg-color);
 

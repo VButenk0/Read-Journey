@@ -19,10 +19,10 @@ const EmojiModals = () => {
           and now you can start your training
         </MainText>
       ) : (
-        <p>
+        <MainText>
           It was an <span>exciting journey</span>, where each page revealed new
           horizons, and the characters became inseparable friends.
-        </p>
+        </MainText>
       )}
     </EmojiModalWrpr>
   );

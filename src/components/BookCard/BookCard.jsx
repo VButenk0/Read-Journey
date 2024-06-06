@@ -15,19 +15,32 @@ import {
   NoImgWrpr,
   TextBtnWrpr,
 } from "./BookCard.styled";
-import {
-  deleteBookThunk,
-  getUserBooksThunk,
-} from "../../redux/books/operations";
+import { deleteBookThunk } from "../../redux/books/operations";
 
-const BookCard = ({ id, title, author, imageUrl, totalPages, status }) => {
+const BookCard = ({
+  id,
+  title,
+  author,
+  imageUrl,
+  totalPages,
+  status,
+  progress,
+}) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const page = location.pathname;
 
   const handleBookInfo = () => {
     dispatch(
-      changeSelectedItem({ id, title, author, imageUrl, totalPages, status })
+      changeSelectedItem({
+        id,
+        title,
+        author,
+        imageUrl,
+        totalPages,
+        status,
+        progress,
+      })
     );
     dispatch(changeModalOpen(true));
     if (page === "/recommended") {
