@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +12,10 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useSelector } from "react-redux";
+import sprite from "../../assets/sprite.svg";
 import { selectSelectedItem } from "../../redux/selectors";
-import { ReadedStatWrpr } from "../Dashboard/Dashboard.styled";
 import {
+  DiaryWrpr,
   ChartPpHWrpr,
   DateText,
   DateWrpr,
@@ -24,7 +26,10 @@ import {
   PagesText,
   PercMinWrpr,
   PercentText,
+  Sideline,
   Square,
+  TrashIcon,
+  StatsWrpr,
 } from "./Diary.styled";
 
 ChartJS.register(
@@ -40,9 +45,6 @@ ChartJS.register(
 
 const Diary = () => {
   const { totalPages, progress } = useSelector(selectSelectedItem);
-
-  // const { startPage, finishPage, startReading, finishReading, speed } =
-  //   progress;
 
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -64,6 +66,29 @@ const Diary = () => {
 
     return differenceInMinutes;
   };
+
+  const filteredProgress = useMemo(() => {
+    return progress.filter((item) => item.finishReading);
+  }, [progress]);
+
+  const sortedProgress = useMemo(() => {
+    return [...filteredProgress].sort(
+      (a, b) => new Date(b.finishReading) - new Date(a.finishReading)
+    );
+  }, [filteredProgress]);
+
+  const groupedProgress = useMemo(() => {
+    const grouped = {};
+    sortedProgress.forEach((item) => {
+      const date = formatDate(item.finishReading);
+      if (!grouped[date]) {
+        grouped[date] = [];
+      }
+      grouped[date].push(item);
+    });
+    return grouped;
+  }, [sortedProgress]);
+
   const data = {
     labels: ["start", "finish"],
     datasets: [
@@ -105,42 +130,62 @@ const Diary = () => {
   };
 
   return (
-    <ReadedStatWrpr>
-      {progress.map((rs, index) => (
-        <OneReadWrpr key={index}>
-          <HorizWrpr>
+    <DiaryWrpr>
+      {Object.entries(groupedProgress).map(([date, readings], index) => {
+        const totalPagesReaded = readings.reduce(
+          (acc, rs) => acc + pagesReaded(rs.startPage, rs.finishPage),
+          0
+        );
+        return (
+          <OneReadWrpr key={index}>
             <DateWrpr>
-              <Square>
-                <div></div>
+              <Square className={index === 0 ? "first" : ""}>
+                <div />
               </Square>
-              <DateText>{formatDate(rs.finishReading)}</DateText>
+              <HorizWrpr>
+                <DateText className={index === 0 ? "first" : ""}>
+                  {date}
+                </DateText>
+                <PagesText>{totalPagesReaded + " pages"}</PagesText>
+              </HorizWrpr>
             </DateWrpr>
-            <PagesText>
-              {pagesReaded(rs.startPage, rs.finishPage) + " pages"}
-            </PagesText>
-          </HorizWrpr>
-          <HorizWrpr>
-            <PercMinWrpr>
-              <PercentText>
-                {(
-                  (pagesReaded(rs.startPage, rs.finishPage) / totalPages) *
-                  100
-                ).toFixed(2) + "%"}
-              </PercentText>
-              <MinutesText>
-                {minutesRead(rs.startReading, rs.finishReading) + " minutes"}
-              </MinutesText>
-            </PercMinWrpr>
-            <ChartPpHWrpr>
-              <Line data={data} options={options} />
-              <PagesPerHourText>
-                {rs.speed + " pages per hour"}
-              </PagesPerHourText>
-            </ChartPpHWrpr>
-          </HorizWrpr>
-        </OneReadWrpr>
-      ))}
-    </ReadedStatWrpr>
+            {readings.map((rs, idx) => (
+              <StatsWrpr key={idx}>
+                <HorizWrpr>
+                  <PercMinWrpr>
+                    <PercentText>
+                      {(
+                        (pagesReaded(rs.startPage, rs.finishPage) /
+                          totalPages) *
+                        100
+                      ).toFixed(2) + "%"}
+                    </PercentText>
+                    <MinutesText>
+                      {minutesRead(rs.startReading, rs.finishReading) +
+                        " minutes"}
+                    </MinutesText>
+                  </PercMinWrpr>
+                  <ChartPpHWrpr>
+                    <Line data={data} options={options} />
+                    <PagesPerHourText>
+                      {rs.speed + " pages per hour"}
+                    </PagesPerHourText>
+                  </ChartPpHWrpr>
+                </HorizWrpr>
+                <TrashIcon
+                  width="14"
+                  height="14"
+                  stroke="var(--secondary-text)"
+                >
+                  <use href={sprite + "#trash"}></use>
+                </TrashIcon>
+              </StatsWrpr>
+            ))}
+          </OneReadWrpr>
+        );
+      })}
+      <Sideline />
+    </DiaryWrpr>
   );
 };
 

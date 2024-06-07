@@ -7,21 +7,19 @@ export const BookWrpr = styled.div`
   width: 137px;
   height: 248px;
 
-  cursor: pointer;
-
   img {
     width: 137px;
     height: 208px;
     border-radius: 8px;
     border: 1px solid transparent;
     transition: all 0.3s;
+
+    cursor: pointer;
   }
 
-  &:hover,
-  &:active {
-    img {
-      border: 1px solid var(--hover-border);
-    }
+  img:hover,
+  img:active {
+    border: 1px solid var(--hover-border);
   }
 `;
 

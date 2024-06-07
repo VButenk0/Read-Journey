@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import sprite from "../../assets/sprite.svg";
 import { selectSelectedItem } from "../../redux/selectors";
 import {

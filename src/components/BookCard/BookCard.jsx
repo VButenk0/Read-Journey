@@ -84,7 +84,7 @@ const BookCard = ({
             <p>{author}</p>
           </LibBookInfo>
           <DeleteBtn onClick={handleDelete}>
-            <svg width="14" height="14">
+            <svg width="14" height="14" stroke="var(--red)">
               <use href={sprite + "#trash"}></use>
             </svg>
           </DeleteBtn>

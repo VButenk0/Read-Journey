@@ -9,6 +9,7 @@ import Dashboard from "../../components/Dashboard/Dashboard";
 import MyBook from "../../components/MyBook/MyBook";
 import {
   finishReadingThunk,
+  getBookInfoThunk,
   startReadingThunk,
 } from "../../redux/books/operations";
 import { selectSelectedItem } from "../../redux/selectors";
@@ -34,6 +35,7 @@ import {
   changeModalOpen,
   changeReadedBookModal,
 } from "../../redux/modals/modalsSlice";
+import { ErrorMsg } from "../../components/AuthPage/AuthPage.styled";
 
 const ReadingPage = () => {
   const dispatch = useDispatch();
@@ -41,7 +43,7 @@ const ReadingPage = () => {
   console.log(mode);
 
   const selectedItem = useSelector(selectSelectedItem);
-  const { id, status, progress } = selectedItem;
+  const { _id: id, status, progress } = selectedItem;
   console.log(status);
   const validationSchema = Yup.object().shape({
     title: Yup.string(),
@@ -62,10 +64,15 @@ const ReadingPage = () => {
   const onSubmit = (data) => {
     const page = data.totalPages;
     console.log(data);
+    console.log(id);
     if (isActive) {
       dispatch(finishReadingThunk({ id, page }));
     } else {
-      dispatch(startReadingThunk({ id, page }));
+      if (page > progress[progress.length - 1].finishPage) {
+        dispatch(startReadingThunk({ id, page }));
+      } else {
+        console.log("You can't read readed page");
+      }
     }
   };
 
@@ -80,11 +87,12 @@ const ReadingPage = () => {
   };
 
   useEffect(() => {
+    dispatch(getBookInfoThunk(id));
     if (status === "done") {
       dispatch(changeModalOpen(true));
       dispatch(changeReadedBookModal(true));
     }
-  }, [dispatch, status]);
+  }, [dispatch, id, status]);
 
   return (
     <Container>
@@ -101,9 +109,15 @@ const ReadingPage = () => {
                     name="totalPages"
                     type="text"
                     placeholder="Enter text"
+                    defaultValue={
+                      progress[progress.length - 1].finishPage ||
+                      progress[progress.length - 1].startPage + 1
+                    }
                     {...register("totalPages")}
                   />
-                  {errors.page && <p>{errors.page.message}</p>}
+                  {errors.totalPages && (
+                    <ErrorMsg>{errors.totalPages.message}</ErrorMsg>
+                  )}
                 </FilterInput>
               </InputsWrpr>
               <ToApplyBtn type="submit">
