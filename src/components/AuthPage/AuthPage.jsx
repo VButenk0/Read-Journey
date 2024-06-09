@@ -63,7 +63,6 @@ const AuthForm = ({ mode }) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     if (isLogin) {
       dispatch(signinThunk(data)).then(() => {
         console.log(`Welcome back, ${user.name}!`);

@@ -52,18 +52,10 @@ const MyLibraryBooks = () => {
       {filteredLibrary.length !== 0 ? (
         <BooksList>
           {filteredLibrary.map(
-            ({
-              _id,
-              title,
-              author,
-              imageUrl,
-              totalPages,
-              status,
-              progress,
-            }) => (
+            ({ id, title, author, imageUrl, totalPages, status, progress }) => (
               <BookCard
-                key={_id}
-                id={_id}
+                key={id}
+                id={id}
                 title={title}
                 author={author}
                 imageUrl={imageUrl}
@@ -77,10 +69,14 @@ const MyLibraryBooks = () => {
       ) : (
         <NoBooksWrpr>
           <p>&#128218;</p>
-          <p>
-            To start training, add <span>some of your books</span> or from the
-            recommended ones
-          </p>
+          {filter === "all" || filteredLibrary.length !== 0 ? (
+            <p>
+              To start training, add <span>some of your books</span> or from the
+              recommended ones
+            </p>
+          ) : (
+            <p>No book in {filter} status</p>
+          )}
         </NoBooksWrpr>
       )}
     </LibraryWrpr>

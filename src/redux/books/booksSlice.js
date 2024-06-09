@@ -10,6 +10,7 @@ import {
   finishReadingThunk,
   deleteReadingThunk,
 } from "./operations";
+import { transformId } from "../../helpers/helpers";
 
 const thunks = [
   recommendBooksThunk,
@@ -49,7 +50,8 @@ export const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(recommendBooksThunk.fulfilled, (state, { payload }) => {
-        state.books = payload.results;
+        const transformedResults = transformId(payload.results);
+        state.books = transformedResults;
         state.totalPages = payload.totalPages;
         state.page = payload.page;
         state.perPage = payload.perPage;
@@ -69,7 +71,7 @@ export const booksSlice = createSlice({
         state.isError = null;
       })
       .addCase(deleteBookThunk.fulfilled, (state, { payload }) => {
-        state.library = state.library.filter((book) => book._id !== payload.id);
+        state.library = state.library.filter((book) => book.id !== payload.id);
         state.isLoading = false;
         state.isError = null;
       })
@@ -79,9 +81,7 @@ export const booksSlice = createSlice({
         state.isError = null;
       })
       .addCase(startReadingThunk.fulfilled, (state, { payload }) => {
-        const index = state.library.findIndex(
-          (book) => book._id === payload._id
-        );
+        const index = state.library.findIndex((book) => book.id === payload.id);
         if (index !== -1) {
           state.library[index] = payload;
         }
@@ -90,9 +90,7 @@ export const booksSlice = createSlice({
         state.isError = null;
       })
       .addCase(finishReadingThunk.fulfilled, (state, { payload }) => {
-        const index = state.library.findIndex(
-          (book) => book._id === payload._id
-        );
+        const index = state.library.findIndex((book) => book.id === payload.id);
         if (index !== -1) {
           state.library[index] = payload;
         }
@@ -100,7 +98,7 @@ export const booksSlice = createSlice({
         state.isLoading = false;
         state.isError = null;
       })
-      .addCase(deleteReadingThunk.fulfilled, (state, { payload }) => {
+      .addCase(deleteReadingThunk.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = null;
       })

@@ -40,11 +40,10 @@ import { ErrorMsg } from "../../components/AuthPage/AuthPage.styled";
 const ReadingPage = () => {
   const dispatch = useDispatch();
   const [mode, setMode] = useState("Diary");
-  console.log(mode);
 
   const selectedItem = useSelector(selectSelectedItem);
-  const { _id: id, status, progress } = selectedItem;
-  console.log(status);
+  const { id, status, progress } = selectedItem;
+
   const validationSchema = Yup.object().shape({
     title: Yup.string(),
     author: Yup.string(),
@@ -63,8 +62,6 @@ const ReadingPage = () => {
 
   const onSubmit = (data) => {
     const page = data.totalPages;
-    console.log(data);
-    console.log(id);
     if (isActive) {
       dispatch(finishReadingThunk({ id, page }));
     } else {
@@ -110,7 +107,7 @@ const ReadingPage = () => {
                     type="text"
                     placeholder="Enter text"
                     defaultValue={
-                      progress[progress.length - 1].finishPage ||
+                      progress[progress.length - 1].finishPage + 1 ||
                       progress[progress.length - 1].startPage + 1
                     }
                     {...register("totalPages")}

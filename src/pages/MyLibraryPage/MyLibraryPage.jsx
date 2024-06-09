@@ -47,8 +47,6 @@ const MyLibraryPage = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-
     dispatch(addBookThunk(data)).then(() => {
       dispatch(changeModalOpen(true));
       dispatch(changeAddedBookModal(true));
@@ -103,8 +101,8 @@ const MyLibraryPage = () => {
           <InstructionWrpr>
             <h2 style={{ paddingBottom: 0 }}>Recommended books</h2>
             <PreviewBooksWrpr>
-              {previewBooks.map(({ _id, title, author, imageUrl }) => (
-                <BookCard key={_id}>
+              {previewBooks.map(({ id, title, author, imageUrl }) => (
+                <BookCard key={id}>
                   <img
                     src={imageUrl}
                     alt={title + "'s Cover"}

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "../src/components/MainLayout/MainLayout";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
@@ -7,10 +9,8 @@ import MyLibraryPage from "./pages/MyLibraryPage/MyLibraryPage";
 import ReadingPage from "./pages/ReadingPage/ReadingPage";
 import PrivateRoute from "./routesConfig/PrivateRoute";
 import PublicRoute from "./routesConfig/PublicRoute";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { currentThunk, refreshThunk } from "./redux/auth/operations";
 import Loader from "./components/Loader/Loader";
+import { currentThunk, refreshThunk } from "./redux/auth/operations";
 import { selectIsLoading, selectIsLoadingB } from "./redux/selectors";
 
 function App() {
@@ -19,10 +19,19 @@ function App() {
   const isLoadingB = useSelector(selectIsLoadingB);
 
   useEffect(() => {
-    dispatch(currentThunk()).catch(() => {
-      dispatch(refreshThunk());
-      dispatch(currentThunk());
-    });
+    const checkAuth = async () => {
+      try {
+        await dispatch(currentThunk()).unwrap();
+      } catch {
+        try {
+          await dispatch(refreshThunk()).unwrap();
+          await dispatch(currentThunk()).unwrap();
+        } catch {
+          // handle error
+        }
+      }
+    };
+    checkAuth();
   }, [dispatch]);
 
   return (
@@ -53,9 +62,30 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route path="/recommended" element={<RecommendedPage />} />
-          <Route path="/library" element={<MyLibraryPage />} />
-          <Route path="/reading" element={<ReadingPage />} />
+          <Route
+            path="/recommended"
+            element={
+              <PrivateRoute>
+                <RecommendedPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/library"
+            element={
+              <PrivateRoute>
+                <MyLibraryPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/reading"
+            element={
+              <PrivateRoute>
+                <ReadingPage />
+              </PrivateRoute>
+            }
+          />
         </Route>
       </Routes>
     </>

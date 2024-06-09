@@ -54,8 +54,6 @@ const RecommendedPage = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-
     const reqBody = { ...data, page, limit };
     dispatch(recommendBooksThunk(reqBody));
   };

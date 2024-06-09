@@ -1,16 +1,20 @@
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { selectIsLogged } from "../redux/selectors.js";
+import { Navigate } from "react-router-dom";
+import { selectIsLogged, selectIsLoading } from "../redux/selectors";
 
 const PrivateRoute = ({ children }) => {
   const isLogged = useSelector(selectIsLogged);
-  const navigate = useNavigate();
+  const isLoading = useSelector(selectIsLoading);
 
-  if (isLogged) {
-    return children;
-  } else {
-    navigate("/login");
+  if (isLoading) {
+    return null;
   }
+
+  if (!isLogged) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
 export default PrivateRoute;

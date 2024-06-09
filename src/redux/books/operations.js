@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../configAxios/configAxios";
+import { transformId } from "../../helpers/helpers";
 
 export const recommendBooksThunk = createAsyncThunk(
   "books/recommend",
@@ -26,7 +27,7 @@ export const addBookThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await api.post("/books/add", credentials);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -38,7 +39,7 @@ export const addRcmndBookThunk = createAsyncThunk(
   async (id, thunkApi) => {
     try {
       const { data } = await api.post(`/books/add/${id}`);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -50,7 +51,7 @@ export const deleteBookThunk = createAsyncThunk(
   async (id, thunkApi) => {
     try {
       const { data } = await api.delete(`/books/remove/${id}`);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -64,7 +65,7 @@ export const getUserBooksThunk = createAsyncThunk(
       const params = new URLSearchParams();
       if (status) params.append("status", status);
       const { data } = await api.get(`/books/own?${params.toString()}`);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -76,7 +77,7 @@ export const startReadingThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await api.post("/books/reading/start", credentials);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -88,7 +89,7 @@ export const finishReadingThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await api.post("/books/reading/finish", credentials);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -102,7 +103,7 @@ export const deleteReadingThunk = createAsyncThunk(
       const { data } = await api.delete(
         `/books/reading?bookId=${bookId}&readingId=${readingId}`
       );
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -114,7 +115,7 @@ export const getBookInfoThunk = createAsyncThunk(
   async (id, thunkApi) => {
     try {
       const { data } = await api.post(`/books/${id}`);
-      return data;
+      return transformId(data);
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

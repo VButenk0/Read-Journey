@@ -61,7 +61,7 @@ const Dashboard = ({ children }) => {
   //   // const isDesktop = useMediaQuery({ minWidth: 1440 });
 
   //   const selectedItem = useSelector(selectSelectedItem);
-  //   const { _id, totalPages, status, progress } = selectedItem;
+  //   const { id, totalPages, status, progress } = selectedItem;
   //   const isReading = status !== "unread";
   //   const [mode, setMode] = useState("Diary");
 
@@ -104,7 +104,7 @@ const Dashboard = ({ children }) => {
   //         dispatch(changeAddedBookModal(true));
   //       });
   //     } else {
-  //       dispatch(startReadingThunk(_id, data));
+  //       dispatch(startReadingThunk(id, data));
   //     }
   //   };
 
@@ -250,8 +250,8 @@ const Dashboard = ({ children }) => {
             </>
           ) : (
             <PreviewBooksWrpr>
-              {previewBooks.map(({ _id, title, author, imageUrl }) => (
-                <BookCard key={_id}>
+              {previewBooks.map(({ id, title, author, imageUrl }) => (
+                <BookCard key={id}>
                   <img
                     src={imageUrl}
                     alt={title + "'s Cover"}

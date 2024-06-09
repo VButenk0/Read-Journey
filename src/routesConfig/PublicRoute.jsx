@@ -1,14 +1,19 @@
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { selectIsLogged } from "../redux/selectors";
+import { Navigate } from "react-router-dom";
+import { selectIsLogged, selectIsLoading } from "../redux/selectors";
 
 const PublicRoute = ({ children }) => {
   const isLogged = useSelector(selectIsLogged);
-  const navigate = useNavigate();
+  const isLoading = useSelector(selectIsLoading);
+
+  if (isLoading) {
+    return null;
+  }
 
   if (isLogged) {
-    navigate("/recommended");
+    return <Navigate to="/recommended" replace />;
   }
+
   return children;
 };
 

@@ -69,10 +69,10 @@ const RecommendedBooks = () => {
         </PaginationWrpr>
       </RcmndHeader>
       <BooksList>
-        {books.map(({ _id, title, author, imageUrl, totalPages }) => (
+        {books.map(({ id, title, author, imageUrl, totalPages }) => (
           <BookCard
-            key={_id}
-            id={_id}
+            key={id}
+            id={id}
             title={title}
             author={author}
             imageUrl={imageUrl}
