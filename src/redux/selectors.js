@@ -19,3 +19,4 @@ export const selectStartReadingModal = (state) =>
 export const selectAddedBookModal = (state) => state.modalsSlice.addedBookModal;
 export const selectreadedBookModal = (state) =>
   state.modalsSlice.readedBookModal;
+export const selectBurgerMenu = (state) => state.modalsSlice.burgerMenu;

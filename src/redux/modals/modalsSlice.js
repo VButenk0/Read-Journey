@@ -8,6 +8,7 @@ export const modalsSlice = createSlice({
     startReadingModal: false,
     addedBookModal: false,
     readedBookModal: false,
+    burgerMenu: false,
   },
 
   reducers: {
@@ -26,12 +27,16 @@ export const modalsSlice = createSlice({
     changeReadedBookModal: (state, { payload }) => {
       state.readedBookModal = payload;
     },
-    closeModals: (state, { payload }) => {
-      state.isModalOpen = payload;
-      state.addToLibraryModal = payload;
-      state.startReadingModal = payload;
-      state.addedBookModal = payload;
-      state.readedBookModal = payload;
+    changeBurgerMenu: (state, { payload }) => {
+      state.burgerMenu = payload;
+    },
+    closeModals: (state) => {
+      state.isModalOpen = false;
+      state.addToLibraryModal = false;
+      state.startReadingModal = false;
+      state.addedBookModal = false;
+      state.readedBookModal = false;
+      state.burgerMenu = false;
     },
   },
 });
@@ -43,5 +48,6 @@ export const {
   changeAddedBookModal,
   changeReadedBookModal,
   closeModals,
+  changeBurgerMenu,
 } = modalsSlice.actions;
 export const modalsReducer = modalsSlice.reducer;
