@@ -7,6 +7,15 @@ export const RcmndBooksWrpr = styled.div`
   padding: 40px 42px 28px 40px;
   background-color: var(--bg-color);
   border-radius: 30px;
+
+  @media only screen and (max-width: 767px) {
+    padding: 40px 20px;
+    width: 335px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    padding: 40px;
+    width: 704px;
+  }
 `;
 
 export const RcmndHeader = styled.div`
@@ -75,4 +84,13 @@ export const BooksList = styled.div`
   grid-template-rows: 1fr 1fr;
   row-gap: 27px;
   column-gap: 20px;
+
+  @media only screen and (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
+  }
 `;

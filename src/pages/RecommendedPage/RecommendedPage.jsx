@@ -26,6 +26,7 @@ const RecommendedPage = () => {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1439 });
+  const isDesktop = useMediaQuery({ minWidth: 1440 });
 
   const validationSchema = Yup.object().shape({
     title: Yup.string(),
@@ -115,13 +116,15 @@ const RecommendedPage = () => {
               </svg>
             </StyledLink>
           </InstructionWrpr>
-          <QuoteWrpr>
-            <p>📚</p>
-            <p>
-              &quot;Books are <span>windows</span> to the world, and reading is
-              a journey into the unknown.&quot;
-            </p>
-          </QuoteWrpr>
+          {isDesktop && (
+            <QuoteWrpr>
+              <p>📚</p>
+              <p>
+                &quot;Books are <span>windows</span> to the world, and reading
+                is a journey into the unknown.&quot;
+              </p>
+            </QuoteWrpr>
+          )}
         </Dashboard>
         <RecommendedBooks />
       </RcmndPageWrpr>

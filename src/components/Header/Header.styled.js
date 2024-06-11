@@ -7,7 +7,7 @@ export const HeaderWrpr = styled.div`
   align-items: center;
   position: relative;
 
-  width: 100%;
+  width: 1216px;
   background-color: var(--bg-color);
   border-radius: 15px;
   padding: 11px 20px;
@@ -16,6 +16,14 @@ export const HeaderWrpr = styled.div`
   @media only screen and (min-width: 768px) {
     padding: 16px;
     margin: 32px 0 16px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    width: 704px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 335px;
   }
 `;
 

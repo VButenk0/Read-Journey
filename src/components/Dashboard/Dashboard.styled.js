@@ -6,12 +6,25 @@ export const DashboardStyled = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  width: 353px !important;
+  width: 353px;
   height: 651px;
 
   padding: 20px;
   background-color: var(--bg-color);
   border-radius: 30px;
+
+  @media only screen and (max-width: 767px) {
+    width: 335px;
+    height: auto;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    width: 704px;
+    height: auto;
+    flex-direction: row;
+    padding: 32px;
+    gap: 32px;
+  }
 `;
 
 export const FiltersWrpr = styled.div`
@@ -24,6 +37,14 @@ export const FiltersWrpr = styled.div`
 
   form:first-child {
     margin-bottom: 8px;
+  }
+
+  @media only screen and (max-width: 1439px) {
+    padding-bottom: 20px;
+
+    p {
+      padding-top: 0;
+    }
   }
 `;
 
@@ -101,6 +122,8 @@ export const InstructionWrpr = styled.div`
 
   padding: 20px;
 
+  width: 313px;
+
   h2 {
     font-family: "Gilroy Bold";
     font-size: 20px;
@@ -108,6 +131,10 @@ export const InstructionWrpr = styled.div`
     letter-spacing: -0.4px;
 
     padding-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 1439px) {
+    width: auto;
   }
 `;
 

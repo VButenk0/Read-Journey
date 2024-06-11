@@ -9,6 +9,8 @@ export const Global = createGlobalStyle`
 }
 
 body {
+  display: flex;
+  justify-content: center;
   color: var(--primary-text);
   font-family: "Gilroy Medium";
   font-size: 14px;
@@ -20,8 +22,6 @@ body {
   min-width: 320px;
   max-width: 1440px;
   min-height: 100vh;
-
-  margin: 0 auto;
 }
 
 h1,
