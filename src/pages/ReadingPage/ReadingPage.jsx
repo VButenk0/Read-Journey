@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,12 +7,18 @@ import sprite from "../../assets/sprite.svg";
 import Container from "../../components/Container/Container";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import MyBook from "../../components/MyBook/MyBook";
+import Diary from "../../components/Diary/Diary";
+import Statistics from "../../components/Statistics/Statistics";
 import {
   finishReadingThunk,
   getBookInfoThunk,
   startReadingThunk,
 } from "../../redux/books/operations";
 import { selectSelectedItem } from "../../redux/selectors";
+import {
+  changeModalOpen,
+  changeReadedBookModal,
+} from "../../redux/modals/modalsSlice";
 import { ReadingPageWrpr } from "./ReadingPage.styled";
 import {
   FilterInput,
@@ -28,13 +34,6 @@ import {
   StyledForm,
   ToApplyBtn,
 } from "../../components/Dashboard/Dashboard.styled";
-import Statistics from "../../components/Statistics/Statistics";
-import Diary from "../../components/Diary/Diary";
-import { useEffect } from "react";
-import {
-  changeModalOpen,
-  changeReadedBookModal,
-} from "../../redux/modals/modalsSlice";
 import { ErrorMsg } from "../../components/AuthPage/AuthPage.styled";
 
 const ReadingPage = () => {

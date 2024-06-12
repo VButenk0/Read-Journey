@@ -43,7 +43,7 @@ const RecommendedPage = () => {
 
   const page = useSelector(selectPage);
   const limit = () => {
-    let perPage;
+    let perPage = 10;
     if (isMobile) {
       perPage = 2;
     } else if (isTablet) {
@@ -55,7 +55,7 @@ const RecommendedPage = () => {
   };
 
   const onSubmit = (data) => {
-    const reqBody = { ...data, page, limit };
+    const reqBody = { ...data, page, limit: limit() };
     dispatch(recommendBooksThunk(reqBody));
   };
 

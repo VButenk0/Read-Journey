@@ -11,6 +11,14 @@ export const LibraryWrpr = styled.div`
   padding: 40px;
   background-color: var(--bg-color);
   border-radius: 30px;
+
+  @media only screen and (max-width: 1439px) {
+    width: 100%;
+    height: auto;
+  }
+  @media only screen and (max-width: 767px) {
+    padding: 40px 20px;
+  }
 `;
 
 export const LibHeader = styled.div`
@@ -44,7 +52,19 @@ export const BooksList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr 1fr;
-  row-gap: 7px;
+  column-gap: 20px;
+  row-gap: 27px;
+
+  @media only screen and (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    row-gap: 23px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;
+    column-gap: 25px;
+  }
 `;
 
 export const NoBooksWrpr = styled.div`

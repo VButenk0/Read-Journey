@@ -11,6 +11,7 @@ export const RcmndBooksWrpr = styled.div`
   @media only screen and (max-width: 767px) {
     padding: 40px 20px;
     width: 335px;
+    height: auto;
   }
   @media only screen and (min-width: 768px) and (max-width: 1439px) {
     padding: 40px;
@@ -30,6 +31,12 @@ export const Title = styled.h1`
   font-size: 28px;
   line-height: 1.14;
   letter-spacing: 0.56px;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.4px;
+  }
 `;
 
 export const PaginationWrpr = styled.div`
@@ -51,6 +58,16 @@ export const PaginationWrpr = styled.div`
 
     svg use {
       stroke: var(--primary-text);
+    }
+
+    @media only screen and (max-width: 767px) {
+      width: 32px;
+      height: 32px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 
@@ -82,15 +99,17 @@ export const BooksList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr 1fr;
-  row-gap: 27px;
   column-gap: 20px;
+  row-gap: 27px;
 
   @media only screen and (max-width: 767px) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
+    row-gap: 23px;
   }
   @media only screen and (min-width: 768px) and (max-width: 1439px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr 1fr;
+    column-gap: 25px;
   }
 `;

@@ -19,11 +19,11 @@ export const HeaderWrpr = styled.div`
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1439px) {
-    width: 704px;
+    width: 100%;
   }
 
   @media only screen and (max-width: 767px) {
-    width: 335px;
+    width: 100%;
   }
 `;
 
@@ -59,6 +59,8 @@ export const StyledNavLink = styled(NavLink)`
   font-size: 16px;
   line-height: 1.125;
   letter-spacing: -0.32px;
+
+  width: fit-content;
 
   padding-bottom: 8px;
 

@@ -19,6 +19,7 @@ import {
   RcmndHeader,
   Title,
 } from "./RecommendedBooks.styled";
+import { useMediaQuery } from "react-responsive";
 
 const RecommendedBooks = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const RecommendedBooks = () => {
   const totalPagesBooks = useSelector(selectTotalPages);
   const page = useSelector(selectPage);
   const [actualPage, setActualPage] = useState(page);
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1439 });
 
   const onDecrementClick = () => {
     if (actualPage > 1) {
@@ -42,8 +46,20 @@ const RecommendedBooks = () => {
   };
 
   useEffect(() => {
-    dispatch(recommendBooksThunk({ page: actualPage }));
-  }, [dispatch, actualPage]);
+    const limit = () => {
+      let perPage = 10;
+      if (isMobile) {
+        perPage = 2;
+      } else if (isTablet) {
+        perPage = 8;
+      } else {
+        perPage = 10;
+      }
+      return perPage;
+    };
+
+    dispatch(recommendBooksThunk({ page: actualPage, limit: limit() }));
+  }, [dispatch, actualPage, isMobile, isTablet]);
 
   return (
     <RcmndBooksWrpr>

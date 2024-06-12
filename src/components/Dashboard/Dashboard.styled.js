@@ -14,12 +14,12 @@ export const DashboardStyled = styled.div`
   border-radius: 30px;
 
   @media only screen and (max-width: 767px) {
-    width: 335px;
+    width: 100%;
     height: auto;
   }
 
   @media only screen and (min-width: 768px) and (max-width: 1439px) {
-    width: 704px;
+    width: 100%;
     height: auto;
     flex-direction: row;
     padding: 32px;

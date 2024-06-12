@@ -11,6 +11,7 @@ export const Global = createGlobalStyle`
 body {
   display: flex;
   justify-content: center;
+  
   color: var(--primary-text);
   font-family: "Gilroy Medium";
   font-size: 14px;
@@ -22,6 +23,20 @@ body {
   min-width: 320px;
   max-width: 1440px;
   min-height: 100vh;
+
+  margin: 0 auto;
+
+  @media only screen and (min-width: 1439px) {
+     width: 1280px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+     width: 768px;
+  }
+
+  @media only screen and (max-width: 767px) {
+     width: 375px;
+  }
 }
 
 h1,
