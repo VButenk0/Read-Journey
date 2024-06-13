@@ -11,6 +11,11 @@ export const ReadingWrpr = styled.div`
   padding-bottom: 53px;
   background-color: var(--bg-color);
   border-radius: 30px;
+
+  @media only screen and (max-width: 1439px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const Title = styled.h1`

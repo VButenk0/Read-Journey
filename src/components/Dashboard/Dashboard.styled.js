@@ -22,8 +22,8 @@ export const DashboardStyled = styled.div`
     width: 100%;
     height: auto;
     flex-direction: row;
-    padding: 32px;
-    gap: 32px;
+    padding: 32px 16px;
+    gap: 40px;
   }
 `;
 
@@ -259,6 +259,10 @@ export const ProgressWrpr = styled.div`
   flex: 1;
 
   padding-top: 40px;
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    padding-top: 0;
+  }
 `;
 
 export const ProgrDscrText = styled.p`

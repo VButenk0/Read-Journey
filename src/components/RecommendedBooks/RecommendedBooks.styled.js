@@ -10,12 +10,12 @@ export const RcmndBooksWrpr = styled.div`
 
   @media only screen and (max-width: 767px) {
     padding: 40px 20px;
-    width: 335px;
+    width: 100%;
     height: auto;
   }
   @media only screen and (min-width: 768px) and (max-width: 1439px) {
     padding: 40px;
-    width: 704px;
+    width: 100%;
   }
 `;
 
