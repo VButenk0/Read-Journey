@@ -22,11 +22,11 @@ body {
 
   min-width: 320px;
   max-width: 1440px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 
   margin: 0 auto;
 
-  @media only screen and (min-width: 1439px) {
+  @media only screen and (min-width: 1440px) {
      width: 1280px;
   }
 

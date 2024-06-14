@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -7,6 +8,7 @@ import phone from "../../images/iPhone 15 Black.png";
 import sprite from "../../assets/sprite.svg";
 import Container from "../Container/Container";
 import { signinThunk, signupThunk } from "../../redux/auth/operations";
+import { selectUser } from "../../redux/selectors";
 import {
   AuthPageWrpr,
   AuthTitle,
@@ -20,8 +22,7 @@ import {
   ErrorMsg,
   SuccessMsg,
 } from "./AuthPage.styled";
-import { useNavigate } from "react-router-dom";
-import { selectUser } from "../../redux/selectors";
+import { useMediaQuery } from "react-responsive";
 
 const AuthForm = ({ mode }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const AuthForm = ({ mode }) => {
   const user = useSelector(selectUser);
   const [showPassword, setShowPassword] = useState(false);
   const isLogin = mode === "login";
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1439 });
 
   const validationSchema = Yup.object().shape({
     name: !isLogin && Yup.string().required("Name is required"),
@@ -84,7 +87,7 @@ const AuthForm = ({ mode }) => {
             <svg width="42" height="17">
               <use href={`${sprite}#Logo`}></use>
             </svg>
-            <p>Read Journey</p>
+            {!isMobile && <p>Read Journey</p>}
           </LogoWrpr>
           <AuthTitle>
             Expand your mind, reading <span>a book</span>
@@ -190,9 +193,11 @@ const AuthForm = ({ mode }) => {
             </BtnRlctWrpr>
           </form>
         </BlockWrpr>
-        <BlockWrpr className="rightBlock">
-          <img src={phone} alt="Phone App" width={405} height={656} />
-        </BlockWrpr>
+        {!isTablet && (
+          <BlockWrpr className="rightBlock">
+            <img src={phone} alt="Phone App" width={405} height={656} />
+          </BlockWrpr>
+        )}
       </AuthPageWrpr>
     </Container>
   );

@@ -4,6 +4,12 @@ export const AuthPageWrpr = styled.div`
   display: flex;
   gap: 16px;
   padding: 32px 0;
+
+  @media only screen and (max-width: 767px) {
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+  }
 `;
 
 export const BlockWrpr = styled.div`
@@ -22,6 +28,17 @@ export const BlockWrpr = styled.div`
     align-items: center;
     padding-bottom: 0;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    width: 704px;
+    height: auto;
+    padding: 40px 64px 214px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 335px;
+    padding: 20px;
+  }
 `;
 
 export const LogoWrpr = styled.div`
@@ -33,6 +50,14 @@ export const LogoWrpr = styled.div`
   letter-spacing: 0.36px;
   text-transform: uppercase;
   padding-bottom: 87px;
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    padding-bottom: 157px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 40px;
+  }
 `;
 
 export const AuthTitle = styled.h1`
@@ -46,6 +71,15 @@ export const AuthTitle = styled.h1`
   span {
     color: var(--trnsprnt-text);
   }
+
+  @media only screen and (max-width: 767px) {
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: 0.64px;
+
+    width: 100%;
+    padding-bottom: 20px;
+  }
 `;
 
 export const InputsWrpr = styled.div`
@@ -54,6 +88,16 @@ export const InputsWrpr = styled.div`
   gap: 28px;
   width: 472px;
   padding-bottom: 60px;
+
+  @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    height: 300px;
+    padding-bottom: 82px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 20px;
+    width: 100%;
+  }
 `;
 
 export const InputWrpr = styled.div`
@@ -107,12 +151,28 @@ export const InputWrpr = styled.div`
   :nth-child(4) {
     padding-left: 5px;
   }
+
+  @media only screen and (max-width: 767px) {
+    font-size: 12px;
+    line-height: 1.33;
+    letter-spacing: -0.24px;
+
+    padding: 14px;
+  }
 `;
 
 export const BtnRlctWrpr = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+
+  /* @media only screen and (min-width: 768px) and (max-width: 1439px) {
+    padding-bottom: 82px;
+  } */
+
+  @media only screen and (max-width: 767px) {
+    gap: 14px;
+  }
 `;
 
 export const ErrorMsg = styled.p`
@@ -156,6 +216,14 @@ export const SubmitBtn = styled.button`
     background-color: transparent;
     border: 1px solid var(--border-color);
   }
+
+  @media only screen and (max-width: 767px) {
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: 0.28px;
+
+    padding: 12px 28px;
+  }
 `;
 
 export const RelocateLink = styled.a`
@@ -167,5 +235,11 @@ export const RelocateLink = styled.a`
   &:hover,
   &:active {
     color: var(--primary-text);
+  }
+
+  @media only screen and (max-width: 767px) {
+    font-size: 12px;
+    line-height: 1.16667;
+    letter-spacing: -0.24px;
   }
 `;
