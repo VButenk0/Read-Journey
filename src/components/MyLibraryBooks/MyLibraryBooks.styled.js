@@ -74,7 +74,7 @@ export const NoBooksWrpr = styled.div`
   align-items: center;
   gap: 20px;
 
-  height: 100%;
+  height: 523px;
 
   p:first-of-type {
     display: flex;

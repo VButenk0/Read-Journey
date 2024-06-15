@@ -90,13 +90,16 @@ export const InputsWrpr = styled.div`
   padding-bottom: 60px;
 
   @media only screen and (min-width: 768px) and (max-width: 1439px) {
-    height: 300px;
+    gap: 14px;
+    height: 273px;
     padding-bottom: 82px;
   }
 
   @media only screen and (max-width: 767px) {
+    gap: 8px;
     padding-bottom: 20px;
     width: 100%;
+    height: 183px;
   }
 `;
 
