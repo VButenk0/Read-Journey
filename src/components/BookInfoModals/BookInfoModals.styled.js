@@ -10,8 +10,12 @@ export const AllInfoWrpr = styled.div`
   width: 500px;
 
   img {
-    width: 153px;
-    height: 233px;
+    width: 100%;
+    height: 100%;
+    max-width: 153px;
+    max-height: 233px;
+    object-fit: cover;
+    object-position: center;
     flex-shrink: 0;
     border-radius: 8px;
   }

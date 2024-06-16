@@ -8,8 +8,12 @@ export const BookWrpr = styled.div`
   height: 248px;
 
   img {
-    width: 137px;
-    height: 208px;
+    width: 100%;
+    height: 100%;
+    max-width: 137px;
+    max-height: 208px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 8px;
     border: 1px solid transparent;
     transition: all 0.3s;
@@ -42,6 +46,12 @@ export const NoImgWrpr = styled.div`
   &:hover,
   &:active {
     border: 1px solid var(--hover-border);
+  }
+
+  img {
+    width: 111px;
+    height: 72px;
+    pointer-events: none;
   }
 `;
 

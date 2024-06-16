@@ -11,7 +11,7 @@ export const recommendBooksThunk = createAsyncThunk(
 
       if (title) params.append("title", title);
       if (author) params.append("author", author);
-      if (page) params.append("page", page);
+      if (!title && !author && page) params.append("page", page);
       if (limit) params.append("limit", limit);
 
       const { data } = await api.get(`/books/recommend?${params.toString()}`);

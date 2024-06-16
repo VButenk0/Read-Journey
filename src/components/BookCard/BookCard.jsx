@@ -1,12 +1,14 @@
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import sprite from "../../assets/sprite.svg";
+import noImage from "../../images/no-image.png";
 import {
   changeAddToLibraryModal,
   changeModalOpen,
   changeStartReadingModal,
 } from "../../redux/modals/modalsSlice";
 import { changeSelectedItem } from "../../redux/books/booksSlice";
+import { deleteBookThunk } from "../../redux/books/operations";
 import {
   BookInfo,
   BookWrpr,
@@ -15,7 +17,6 @@ import {
   NoImgWrpr,
   TextBtnWrpr,
 } from "./BookCard.styled";
-import { deleteBookThunk } from "../../redux/books/operations";
 
 const BookCard = ({
   id,
@@ -66,10 +67,7 @@ const BookCard = ({
         />
       ) : (
         <NoImgWrpr onClick={handleBookInfo}>
-          <svg width="50" height="50" stroke="var(--primary-text)">
-            <use href={sprite + "#no-image"}></use>
-          </svg>
-          <p>No cover</p>
+          <img src={noImage} alt="No Image Cover" width={111} height={72} />
         </NoImgWrpr>
       )}
       {page === "/recommended" ? (

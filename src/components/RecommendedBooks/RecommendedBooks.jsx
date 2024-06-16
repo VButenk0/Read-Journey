@@ -67,7 +67,7 @@ const RecommendedBooks = () => {
         <Title>Recommended</Title>
         <PaginationWrpr>
           <button
-            className={page === 1 ? "disable" : ""}
+            className={page <= 1 ? "disable" : ""}
             onClick={onDecrementClick}
           >
             <svg width="20" height="20">
@@ -75,7 +75,7 @@ const RecommendedBooks = () => {
             </svg>
           </button>
           <button
-            className={page === totalPagesBooks ? "disable" : ""}
+            className={page >= totalPagesBooks ? "disable" : ""}
             onClick={onIncrementClick}
           >
             <svg width="20" height="20">

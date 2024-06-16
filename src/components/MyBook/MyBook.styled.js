@@ -34,10 +34,19 @@ export const BookWrpr = styled.div`
   gap: 25px;
 
   img {
-    width: 224px;
-    height: 340px;
+    width: 100%;
+    height: 100%;
+    max-width: 224px;
+    max-height: 340px;
+    object-fit: cover;
+    object-position: center;
     flex: 0;
     border-radius: 8px;
+
+    @media only screen and (min-width: 768px) and (max-width: 1439px) {
+      width: 169px;
+      height: 256px;
+    }
   }
 `;
 

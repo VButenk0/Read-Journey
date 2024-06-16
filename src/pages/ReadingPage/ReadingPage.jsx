@@ -106,8 +106,9 @@ const ReadingPage = () => {
                     type="text"
                     placeholder="Enter text"
                     defaultValue={
-                      progress[progress.length - 1].finishPage + 1 ||
-                      progress[progress.length - 1].startPage + 1
+                      progress[progress.length - 1]?.finishPage + 1 ||
+                      progress[progress.length - 1]?.startPage + 1 ||
+                      1
                     }
                     {...register("totalPages")}
                   />

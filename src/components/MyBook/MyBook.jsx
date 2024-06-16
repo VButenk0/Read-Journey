@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import sprite from "../../assets/sprite.svg";
+import noImage from "../../images/no-image.png";
 import { selectSelectedItem } from "../../redux/selectors";
 import {
   BookWrpr,
@@ -29,10 +30,7 @@ const MyBook = () => {
           />
         ) : (
           <NoImgMyBook>
-            <svg width="100" height="100" stroke="var(--primary-text)">
-              <use href={sprite + "#no-image"}></use>
-            </svg>
-            <p>No cover</p>
+            <img src={noImage} alt="No Image Cover" width={174} height={112} />
           </NoImgMyBook>
         )}
         <MyBookDscr>
