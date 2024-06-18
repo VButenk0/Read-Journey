@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -63,11 +64,13 @@ const ReadingPage = () => {
     const page = data.totalPages;
     if (isActive) {
       dispatch(finishReadingThunk({ id, page }));
+      toast.success("You have finished reading");
     } else {
       if (page > progress[progress.length - 1].finishPage) {
         dispatch(startReadingThunk({ id, page }));
+        toast.success("You started reading");
       } else {
-        console.log("You can't read readed page");
+        toast.error("You can't read readed page");
       }
     }
   };

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -22,7 +24,6 @@ import {
   ErrorMsg,
   SuccessMsg,
 } from "./AuthPage.styled";
-import { useMediaQuery } from "react-responsive";
 
 const AuthForm = ({ mode }) => {
   const dispatch = useDispatch();
@@ -68,12 +69,12 @@ const AuthForm = ({ mode }) => {
   const onSubmit = (data) => {
     if (isLogin) {
       dispatch(signinThunk(data)).then(() => {
-        console.log(`Welcome back, ${user.name}!`);
+        toast.success(`Welcome back, ${user.name}!`);
         navigate("/recommended");
       });
     } else {
       dispatch(signupThunk(data)).then(() => {
-        console.log(`Welcome, ${user.name}!`);
+        toast.success(`Welcome, ${user.name}!`);
         navigate("/recommended");
       });
     }
