@@ -75,7 +75,7 @@ const MyLibraryBooks = () => {
               recommended ones
             </p>
           ) : (
-            <p>No book in {filter} status</p>
+            <p>No books are in the {filter} status yet</p>
           )}
         </NoBooksWrpr>
       )}

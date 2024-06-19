@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
@@ -10,7 +10,6 @@ import phone from "../../images/iPhone 15 Black.png";
 import sprite from "../../assets/sprite.svg";
 import Container from "../Container/Container";
 import { signinThunk, signupThunk } from "../../redux/auth/operations";
-import { selectUser } from "../../redux/selectors";
 import {
   AuthPageWrpr,
   AuthTitle,
@@ -28,7 +27,6 @@ import {
 const AuthForm = ({ mode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
   const [showPassword, setShowPassword] = useState(false);
   const isLogin = mode === "login";
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -69,12 +67,12 @@ const AuthForm = ({ mode }) => {
   const onSubmit = (data) => {
     if (isLogin) {
       dispatch(signinThunk(data)).then(() => {
-        toast.success(`Welcome back, ${user.name}!`);
+        toast.success(`Welcome back!`);
         navigate("/recommended");
       });
     } else {
       dispatch(signupThunk(data)).then(() => {
-        toast.success(`Welcome, ${user.name}!`);
+        toast.success(`Welcome, ${data.name}!`);
         navigate("/recommended");
       });
     }

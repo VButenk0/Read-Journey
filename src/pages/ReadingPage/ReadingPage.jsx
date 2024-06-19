@@ -12,7 +12,6 @@ import Diary from "../../components/Diary/Diary";
 import Statistics from "../../components/Statistics/Statistics";
 import {
   finishReadingThunk,
-  getBookInfoThunk,
   startReadingThunk,
 } from "../../redux/books/operations";
 import { selectSelectedItem } from "../../redux/selectors";
@@ -58,7 +57,7 @@ const ReadingPage = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const isActive = progress.some((p) => p.status === "active");
+  const isActive = progress?.some((p) => p.status === "active");
 
   const onSubmit = (data) => {
     const page = data.totalPages;
@@ -86,7 +85,6 @@ const ReadingPage = () => {
   };
 
   useEffect(() => {
-    dispatch(getBookInfoThunk(id));
     if (status === "done") {
       dispatch(changeModalOpen(true));
       dispatch(changeReadedBookModal(true));
