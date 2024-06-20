@@ -68,6 +68,7 @@ export const FilterInput = styled.div`
   background-color: var(--addition-bg-color);
   border: 1px solid transparent;
   border-radius: 12px;
+  position: relative;
 
   label {
     color: var(--secondary-text);
@@ -87,6 +88,18 @@ export const FilterInput = styled.div`
   &:active {
     border-color: var(--border-color);
   }
+`;
+
+export const ErrorMsgLib = styled.p`
+  position: absolute;
+  bottom: -5px;
+  right: 10px;
+  z-index: 10;
+
+  color: var(--red);
+  font-size: 12px;
+  line-height: 1.16667;
+  letter-spacing: -0.24px;
 `;
 
 export const ToApplyBtn = styled.button`

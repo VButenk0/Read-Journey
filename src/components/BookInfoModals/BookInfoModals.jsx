@@ -6,7 +6,11 @@ import {
   selectSelectedItem,
 } from "../../redux/selectors";
 import { addRcmndBookThunk } from "../../redux/books/operations";
-import { closeModals } from "../../redux/modals/modalsSlice";
+import {
+  changeAddedBookModal,
+  changeModalOpen,
+  closeModals,
+} from "../../redux/modals/modalsSlice";
 import { NoImgWrpr } from "../BookCard/BookCard.styled";
 import { AllInfoWrpr, SubmitBtn, TextInfoWrpr } from "./BookInfoModals.styled";
 
@@ -17,13 +21,13 @@ const BookInfoModals = () => {
   const selectedBook = useSelector(selectSelectedItem);
   const { id, title, author, imageUrl, totalPages } = selectedBook;
 
-  const addToLibrary = () => {
-    dispatch(addRcmndBookThunk(id))
+  const addToLibrary = async () => {
+    dispatch(addRcmndBookThunk({ id, title }))
+      .unwrap()
       .then(() => {
         dispatch(closeModals());
-      })
-      .catch((error) => {
-        console.log(error.message);
+        dispatch(changeModalOpen(true));
+        dispatch(changeAddedBookModal(true));
       });
   };
 

@@ -61,7 +61,7 @@ const Header = () => {
         <UserWrpr>
           {/* UserBar */}
           <UserBarWrpr>
-            <div>{userData?.name[0]}</div>
+            <div>{userData.name[0]}</div>
             {isDesktop && <p>{userData.name}</p>}
           </UserBarWrpr>
           {/* Logout */}

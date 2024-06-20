@@ -169,10 +169,6 @@ export const BtnRlctWrpr = styled.div`
   align-items: center;
   gap: 20px;
 
-  /* @media only screen and (min-width: 768px) and (max-width: 1439px) {
-    padding-bottom: 82px;
-  } */
-
   @media only screen and (max-width: 767px) {
     gap: 14px;
   }

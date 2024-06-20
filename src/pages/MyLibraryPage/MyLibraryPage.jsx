@@ -16,6 +16,7 @@ import { LibraryPageWrpr } from "./MyLibraryPage.styled";
 import {
   BookCard,
   BookInfo,
+  ErrorMsgLib,
   FilterInput,
   FiltersWrpr,
   InputsWrpr,
@@ -33,9 +34,9 @@ const MyLibraryPage = () => {
   const previewBooks = books.slice(0, 3);
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string(),
-    author: Yup.string(),
-    totalPages: Yup.number(),
+    title: Yup.string().required("Title is required"),
+    author: Yup.string().required("Author is required"),
+    totalPages: Yup.string().required("Pages is required"),
   });
 
   const {
@@ -47,10 +48,12 @@ const MyLibraryPage = () => {
   });
 
   const onSubmit = (data) => {
-    dispatch(addBookThunk(data)).then(() => {
-      dispatch(changeModalOpen(true));
-      dispatch(changeAddedBookModal(true));
-    });
+    dispatch(addBookThunk(data))
+      .unwrap()
+      .then(() => {
+        dispatch(changeModalOpen(true));
+        dispatch(changeAddedBookModal(true));
+      });
   };
 
   return (
@@ -70,7 +73,9 @@ const MyLibraryPage = () => {
                     placeholder="Enter text"
                     {...register("title")}
                   />
-                  {errors.title && <p>{errors.title.message}</p>}
+                  {errors.title && (
+                    <ErrorMsgLib>{errors.title.message}</ErrorMsgLib>
+                  )}
                 </FilterInput>
                 <FilterInput>
                   <label htmlFor="author">The author:</label>
@@ -81,18 +86,23 @@ const MyLibraryPage = () => {
                     placeholder="Enter text"
                     {...register("author")}
                   />
-                  {errors.author && <p>{errors.author.message}</p>}
+                  {errors.author && (
+                    <ErrorMsgLib>{errors.author.message}</ErrorMsgLib>
+                  )}
                 </FilterInput>
                 <FilterInput>
                   <label htmlFor="totalPages">Number of pages:</label>
                   <input
                     id="totalPages"
                     name="totalPages"
-                    type="text"
+                    type="number"
                     placeholder="Enter text"
                     {...register("totalPages")}
                   />
-                  {errors.page && <p>{errors.page.message}</p>}
+                  {errors.totalPages && (
+                    // <ErrorMsgLib>Number of pages is required</ErrorMsgLib>
+                    <ErrorMsgLib>{errors.totalPages.message}</ErrorMsgLib>
+                  )}
                 </FilterInput>
               </InputsWrpr>
               <ToApplyBtn type="submit">Add book</ToApplyBtn>
