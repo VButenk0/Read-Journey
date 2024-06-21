@@ -36,7 +36,6 @@ export const currentThunk = createAsyncThunk(
     const savedToken = thunkApi.getState().authSlice.token;
 
     if (!savedToken) {
-      toast.error("Token doesn't exist");
       return thunkApi.rejectWithValue("Token doesn't exist");
     }
 
@@ -58,7 +57,6 @@ export const refreshThunk = createAsyncThunk(
     const savedToken = thunkApi.getState().authSlice.refreshToken;
 
     if (!savedToken) {
-      toast.error("Token doesn't exist");
       return thunkApi.rejectWithValue("Refresh token doesn't exist");
     }
 

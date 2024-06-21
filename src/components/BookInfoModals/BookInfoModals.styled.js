@@ -8,16 +8,32 @@ export const AllInfoWrpr = styled.div`
   gap: 16px;
   padding: 50px;
   width: 500px;
+`;
+
+export const BookCover = styled.img`
+  width: 100%;
+  height: 100%;
+  max-width: 153px;
+  max-height: 233px;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+`;
+
+export const NoImgWrpr = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 153px;
+  height: 233px;
+  border: 1px solid var(--border10-color);
+  border-radius: 8px;
 
   img {
-    width: 100%;
-    height: 100%;
-    max-width: 153px;
-    max-height: 233px;
-    object-fit: cover;
-    object-position: center;
-    flex-shrink: 0;
-    border-radius: 8px;
+    width: 111px;
+    height: 72px;
+    pointer-events: none;
   }
 `;
 

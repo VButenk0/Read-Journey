@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import sprite from "../../assets/sprite.svg";
 import BookCard from "../BookCard/BookCard";
 import {
@@ -19,7 +20,6 @@ import {
   RcmndHeader,
   Title,
 } from "./RecommendedBooks.styled";
-import { useMediaQuery } from "react-responsive";
 
 const RecommendedBooks = () => {
   const dispatch = useDispatch();

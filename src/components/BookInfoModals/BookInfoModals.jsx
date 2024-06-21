@@ -11,8 +11,13 @@ import {
   changeModalOpen,
   closeModals,
 } from "../../redux/modals/modalsSlice";
-import { NoImgWrpr } from "../BookCard/BookCard.styled";
-import { AllInfoWrpr, SubmitBtn, TextInfoWrpr } from "./BookInfoModals.styled";
+import {
+  AllInfoWrpr,
+  BookCover,
+  NoImgWrpr,
+  SubmitBtn,
+  TextInfoWrpr,
+} from "./BookInfoModals.styled";
 
 const BookInfoModals = () => {
   const dispatch = useDispatch();
@@ -39,7 +44,12 @@ const BookInfoModals = () => {
   return (
     <AllInfoWrpr>
       {imageUrl ? (
-        <img src={imageUrl} alt={title + "'s Cover"} width={153} height={233} />
+        <BookCover
+          src={imageUrl}
+          alt={title + "'s Cover"}
+          width={153}
+          height={233}
+        />
       ) : (
         <NoImgWrpr>
           <img src={noImage} alt="No Image Cover" width={111} height={72} />

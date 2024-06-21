@@ -9,7 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Toast from "./components/Toast/Toast.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/Read-Journey">
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App />

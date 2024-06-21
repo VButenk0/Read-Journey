@@ -25,9 +25,8 @@ function App() {
       } catch {
         try {
           await dispatch(refreshThunk()).unwrap();
+        } finally {
           await dispatch(currentThunk()).unwrap();
-        } catch {
-          // handle error
         }
       }
     };

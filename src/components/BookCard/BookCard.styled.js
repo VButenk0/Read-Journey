@@ -39,8 +39,6 @@ export const NoImgWrpr = styled.div`
   border: 1px solid var(--border10-color);
   border-radius: 8px;
 
-  font-family: "Gilroy Bold";
-
   transition: all 0.3s;
 
   &:hover,
