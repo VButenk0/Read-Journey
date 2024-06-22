@@ -1,27 +1,47 @@
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signoutThunk } from "../../redux/auth/operations";
+import {
+  selectAddedBookModal,
+  selectLogoutModal,
+  selectreadedBookModal,
+} from "../../redux/selectors";
 import { Emoji, EmojiModalWrpr, MainText, Title } from "./EmojiModals.styled";
+import { LogoutBtn } from "../Header/Header.styled";
 
 const EmojiModals = () => {
-  const location = useLocation();
-  const page = location.pathname;
-
+  const dispatch = useDispatch();
+  const addedBookModal = useSelector(selectAddedBookModal);
+  const readedBookModal = useSelector(selectreadedBookModal);
+  const logoutModal = useSelector(selectLogoutModal);
+  // const location = useLocation();
+  // const page = location.pathname;
+  console.log(addedBookModal);
+  console.log(readedBookModal);
+  console.log(logoutModal);
   return (
     <EmojiModalWrpr>
-      {page === "/reading" ? <Emoji>📚</Emoji> : <Emoji>👍</Emoji>}
-      {page === "/reading" ? (
+      {readedBookModal && <Emoji>📚</Emoji>}
+      {addedBookModal && <Emoji>👍</Emoji>}
+      {logoutModal && <Emoji>🥺</Emoji>}
+      {readedBookModal ? (
         <Title>The book is read</Title>
+      ) : logoutModal ? (
+        <Title>Are you leaving?</Title>
       ) : (
         <Title>Good job</Title>
       )}
-      {page === "/library" ? (
-        <MainText>
-          Your book is now in <span>the library!</span> The joy knows no bounds
-          and now you can start your training
-        </MainText>
-      ) : (
+      {readedBookModal ? (
         <MainText>
           It was an <span>exciting journey</span>, where each page revealed new
           horizons, and the characters became inseparable friends.
+        </MainText>
+      ) : logoutModal ? (
+        <LogoutBtn onClick={() => dispatch(signoutThunk())}>Yes</LogoutBtn>
+      ) : (
+        <MainText>
+          Your book is now in <span>the library!</span> The joy knows no bounds
+          and now you can start your training
         </MainText>
       )}
     </EmojiModalWrpr>

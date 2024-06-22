@@ -7,6 +7,7 @@ import {
   selectAddToLibraryModal,
   selectAddedBookModal,
   selectIsModalOpen,
+  selectLogoutModal,
   selectStartReadingModal,
   selectreadedBookModal,
 } from "../../redux/selectors";
@@ -22,6 +23,7 @@ const Modal = () => {
   const startReadingModal = useSelector(selectStartReadingModal);
   const addedBookModal = useSelector(selectAddedBookModal);
   const readedBookModal = useSelector(selectreadedBookModal);
+  const logoutModal = useSelector(selectLogoutModal);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -63,7 +65,9 @@ const Modal = () => {
           <Fade in={modalIsOpen} timeout={700}>
             <ModalStyled>
               {(addToLibraryModal || startReadingModal) && <BookInfoModals />}
-              {(addedBookModal || readedBookModal) && <EmojiModals />}
+              {(addedBookModal || readedBookModal || logoutModal) && (
+                <EmojiModals />
+              )}
 
               <BtnClose type="button" onClick={closeModal}>
                 <svg width={22} height={22}>

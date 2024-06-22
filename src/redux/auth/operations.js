@@ -45,7 +45,7 @@ export const currentThunk = createAsyncThunk(
       const { data } = await api.get("users/current");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -66,7 +66,7 @@ export const refreshThunk = createAsyncThunk(
       const { data } = await api.get("users/current/refresh");
       return data;
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
   }

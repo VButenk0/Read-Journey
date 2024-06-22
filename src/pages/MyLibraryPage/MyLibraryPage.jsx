@@ -100,7 +100,6 @@ const MyLibraryPage = () => {
                     {...register("totalPages")}
                   />
                   {errors.totalPages && (
-                    // <ErrorMsgLib>Number of pages is required</ErrorMsgLib>
                     <ErrorMsgLib>{errors.totalPages.message}</ErrorMsgLib>
                   )}
                 </FilterInput>

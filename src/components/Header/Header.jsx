@@ -5,7 +5,11 @@ import sprite from "../../assets/sprite.svg";
 import Modal from "../Modal/Modal";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { signoutThunk } from "../../redux/auth/operations";
-import { changeBurgerMenu } from "../../redux/modals/modalsSlice";
+import {
+  changeBurgerMenu,
+  changeLogoutModal,
+  changeModalOpen,
+} from "../../redux/modals/modalsSlice";
 import {
   selectBurgerMenu,
   selectIsModalOpen,
@@ -36,7 +40,9 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    dispatch(signoutThunk());
+    dispatch(changeModalOpen(true));
+    dispatch(changeLogoutModal(true));
+    // dispatch(signoutThunk());
   };
 
   return (
@@ -82,7 +88,7 @@ const Header = () => {
         </UserWrpr>
       </HeaderWrpr>
       {modalIsOpen && <Modal />}
-      {burgerMenu && <BurgerMenu />}
+      {burgerMenu && isMobile && <BurgerMenu />}
     </Container>
   );
 };

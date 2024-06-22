@@ -5,7 +5,7 @@ export const EmojiModalWrpr = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  width: 342px;
   padding: 50px;
 `;
 

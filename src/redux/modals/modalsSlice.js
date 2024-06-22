@@ -8,6 +8,7 @@ export const modalsSlice = createSlice({
     startReadingModal: false,
     addedBookModal: false,
     readedBookModal: false,
+    logoutModal: false,
     burgerMenu: false,
   },
 
@@ -26,6 +27,9 @@ export const modalsSlice = createSlice({
     },
     changeReadedBookModal: (state, { payload }) => {
       state.readedBookModal = payload;
+    },
+    changeLogoutModal: (state, { payload }) => {
+      state.logoutModal = payload;
     },
     changeBurgerMenu: (state, { payload }) => {
       state.burgerMenu = payload;
@@ -47,7 +51,8 @@ export const {
   changeStartReadingModal,
   changeAddedBookModal,
   changeReadedBookModal,
-  closeModals,
+  changeLogoutModal,
   changeBurgerMenu,
+  closeModals,
 } = modalsSlice.actions;
 export const modalsReducer = modalsSlice.reducer;

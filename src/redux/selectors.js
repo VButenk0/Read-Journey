@@ -1,4 +1,6 @@
 export const selectUser = (state) => state.authSlice.user;
+export const selectToken = (state) => state.authSlice.token;
+export const selectRefreshToken = (state) => state.authSlice.refreshToken;
 export const selectIsLogged = (state) => state.authSlice.isLogged;
 export const selectIsLoading = (state) => state.authSlice.isLoading;
 
@@ -19,4 +21,5 @@ export const selectStartReadingModal = (state) =>
 export const selectAddedBookModal = (state) => state.modalsSlice.addedBookModal;
 export const selectreadedBookModal = (state) =>
   state.modalsSlice.readedBookModal;
+export const selectLogoutModal = (state) => state.modalsSlice.logoutModal;
 export const selectBurgerMenu = (state) => state.modalsSlice.burgerMenu;

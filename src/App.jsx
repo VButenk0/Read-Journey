@@ -11,27 +11,39 @@ import PrivateRoute from "./routesConfig/PrivateRoute";
 import PublicRoute from "./routesConfig/PublicRoute";
 import Loader from "./components/Loader/Loader";
 import { currentThunk, refreshThunk } from "./redux/auth/operations";
-import { selectIsLoading, selectIsLoadingB } from "./redux/selectors";
+import {
+  selectIsLoading,
+  selectIsLoadingB,
+  selectRefreshToken,
+  selectToken,
+} from "./redux/selectors";
 
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const isLoadingB = useSelector(selectIsLoadingB);
+  const token = useSelector(selectToken);
+  const refreshToken = useSelector(selectRefreshToken);
 
   useEffect(() => {
     const checkAuth = async () => {
-      try {
-        await dispatch(currentThunk()).unwrap();
-      } catch {
+      if (token) {
         try {
-          await dispatch(refreshThunk()).unwrap();
-        } finally {
           await dispatch(currentThunk()).unwrap();
+        } catch {
+          if (refreshToken) {
+            try {
+              await dispatch(refreshThunk()).unwrap();
+              await dispatch(currentThunk()).unwrap();
+            } catch (error) {
+              console.error("Refresh token failed", error);
+            }
+          }
         }
       }
     };
     checkAuth();
-  }, [dispatch]);
+  }, [dispatch, token, refreshToken]);
 
   return (
     <>

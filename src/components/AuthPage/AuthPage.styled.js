@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const AuthPageWrpr = styled.div`
@@ -225,7 +226,7 @@ export const SubmitBtn = styled.button`
   }
 `;
 
-export const RelocateLink = styled.a`
+export const RelocateLink = styled(Link)`
   color: var(--secondary-text);
   text-decoration: underline;
 

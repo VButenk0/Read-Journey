@@ -183,6 +183,7 @@ export const PreviewBooksWrpr = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 265px;
 `;
 
 export const BookCard = styled.div`

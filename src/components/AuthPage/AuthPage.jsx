@@ -184,7 +184,7 @@ const AuthForm = ({ mode }) => {
               <SubmitBtn type="submit">
                 {isLogin ? "Log In" : "Registration"}
               </SubmitBtn>
-              <RelocateLink href={isLogin ? "/register" : "/login"}>
+              <RelocateLink to={isLogin ? "/register" : "/login"}>
                 {isLogin
                   ? "Don’t have an account?"
                   : "Already have an account?"}
