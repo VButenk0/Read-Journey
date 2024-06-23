@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "../src/components/MainLayout/MainLayout";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -80,6 +80,7 @@ function App() {
             </PrivateRoute>
           }
         >
+          <Route path="/" element={<Navigate to="/recommended" />} />
           <Route
             path="/recommended"
             element={
