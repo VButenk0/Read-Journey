@@ -18,7 +18,7 @@ const authPersistConfig = {
   key: "auth",
   version: 1,
   storage,
-  whitelist: ["token", "refreshToken", "user"],
+  whitelist: ["token", "refreshToken", "user", "isLogged"],
 };
 
 const booksPersistConfig = {

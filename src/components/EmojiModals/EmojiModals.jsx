@@ -1,4 +1,3 @@
-// import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutThunk } from "../../redux/auth/operations";
 import {
@@ -14,8 +13,6 @@ const EmojiModals = () => {
   const addedBookModal = useSelector(selectAddedBookModal);
   const readedBookModal = useSelector(selectreadedBookModal);
   const logoutModal = useSelector(selectLogoutModal);
-  // const location = useLocation();
-  // const page = location.pathname;
   console.log(addedBookModal);
   console.log(readedBookModal);
   console.log(logoutModal);

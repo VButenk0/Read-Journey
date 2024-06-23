@@ -10,16 +10,19 @@ import ReadingPage from "./pages/ReadingPage/ReadingPage";
 import PrivateRoute from "./routesConfig/PrivateRoute";
 import PublicRoute from "./routesConfig/PublicRoute";
 import Loader from "./components/Loader/Loader";
+import { changeAuthChecked } from "./redux/auth/authSlice";
 import { currentThunk, refreshThunk } from "./redux/auth/operations";
 import {
   selectIsLoading,
   selectIsLoadingB,
+  selectIsLogged,
   selectRefreshToken,
   selectToken,
 } from "./redux/selectors";
 
 function App() {
   const dispatch = useDispatch();
+  const isLogged = useSelector(selectIsLogged);
   const isLoading = useSelector(selectIsLoading);
   const isLoadingB = useSelector(selectIsLoadingB);
   const token = useSelector(selectToken);
@@ -36,14 +39,18 @@ function App() {
               await dispatch(refreshThunk()).unwrap();
               await dispatch(currentThunk()).unwrap();
             } catch (error) {
-              console.error("Refresh token failed", error);
+              return null;
             }
           }
+        } finally {
+          dispatch(changeAuthChecked(true));
         }
       }
     };
-    checkAuth();
-  }, [dispatch, token, refreshToken]);
+    if (isLogged) {
+      checkAuth();
+    }
+  }, [dispatch, token, refreshToken, isLogged]);
 
   return (
     <>
@@ -97,6 +104,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="*" element="/404.html" />
         </Route>
       </Routes>
     </>

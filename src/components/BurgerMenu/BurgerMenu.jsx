@@ -2,9 +2,10 @@ import { useCallback, useEffect } from "react";
 import ReactDom from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Fade } from "@mui/material";
+import sprite from "../../assets/sprite.svg";
 import { closeModals } from "../../redux/modals/modalsSlice";
 import { selectBurgerMenu } from "../../redux/selectors";
-import { Overlay } from "../Modal/Modal.styled";
+import { BtnClose, Overlay } from "../Modal/Modal.styled";
 import { StyledNavLink } from "../Header/Header.styled";
 import { BurgerMenuWrpr, NavLinksWrpr } from "./BurgerMenu.styled";
 
@@ -54,6 +55,11 @@ const BurgerMenu = () => {
               <StyledNavLink to={"/recommended"}>Home</StyledNavLink>
               <StyledNavLink to={"/library"}>My library</StyledNavLink>
             </NavLinksWrpr>
+            <BtnClose type="button" onClick={closeModal}>
+              <svg width={22} height={22}>
+                <use href={sprite + "#x"} />
+              </svg>
+            </BtnClose>
           </BurgerMenuWrpr>
         </Fade>
       </Overlay>

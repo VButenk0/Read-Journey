@@ -45,7 +45,10 @@ export const currentThunk = createAsyncThunk(
       const { data } = await api.get("users/current");
       return data;
     } catch (error) {
-      // toast.error(error.message);
+      if (error.response && error.response.status === 401) {
+        clearToken();
+        return thunkApi.rejectWithValue("Unauthorized - Please log in again.");
+      }
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -66,7 +69,10 @@ export const refreshThunk = createAsyncThunk(
       const { data } = await api.get("users/current/refresh");
       return data;
     } catch (error) {
-      // toast.error(error.message);
+      if (error.response && error.response.status === 401) {
+        clearToken();
+        return thunkApi.rejectWithValue("Unauthorized - Please log in again.");
+      }
       return thunkApi.rejectWithValue(error.message);
     }
   }

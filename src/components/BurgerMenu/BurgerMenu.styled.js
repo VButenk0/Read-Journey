@@ -4,6 +4,7 @@ export const BurgerMenuWrpr = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   width: 200px;
   height: 100vh;

@@ -18,7 +18,6 @@ export const recommendBooksThunk = createAsyncThunk(
       const { data } = await api.get(`/books/recommend?${params.toString()}`);
       return data;
     } catch (error) {
-      toast.error(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
   }

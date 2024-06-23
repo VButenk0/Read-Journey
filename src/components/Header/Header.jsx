@@ -42,13 +42,11 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(changeModalOpen(true));
     dispatch(changeLogoutModal(true));
-    // dispatch(signoutThunk());
   };
 
   return (
     <Container>
       <HeaderWrpr>
-        {/* Logo */}
         <LogoWrpr to={"/recommended"}>
           <svg width={42} height={17}>
             <use href={sprite + "#Logo"}></use>
@@ -56,7 +54,6 @@ const Header = () => {
           {isDesktop && <p>Read Journey</p>}
         </LogoWrpr>
 
-        {/* UserNav */}
         {!isMobile && (
           <UserNavWrpr>
             <StyledNavLink to={"/recommended"}>Home</StyledNavLink>
@@ -65,14 +62,11 @@ const Header = () => {
         )}
 
         <UserWrpr>
-          {/* UserBar */}
           <UserBarWrpr>
             <div>{userData.name[0]}</div>
             {isDesktop && <p>{userData.name}</p>}
           </UserBarWrpr>
-          {/* Logout */}
           {!isMobile && <LogoutBtn onClick={handleLogout}>Log out</LogoutBtn>}
-          {/* BurgerMenu */}
           {isMobile && (
             <button>
               <StyledBurger

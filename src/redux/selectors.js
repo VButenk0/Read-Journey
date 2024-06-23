@@ -3,6 +3,7 @@ export const selectToken = (state) => state.authSlice.token;
 export const selectRefreshToken = (state) => state.authSlice.refreshToken;
 export const selectIsLogged = (state) => state.authSlice.isLogged;
 export const selectIsLoading = (state) => state.authSlice.isLoading;
+export const selectIsAuthChecked = (state) => state.authSlice.isAuthChecked;
 
 export const selectBooks = (state) => state.booksSlice.books;
 export const selectTotalPages = (state) => state.booksSlice.totalPages;

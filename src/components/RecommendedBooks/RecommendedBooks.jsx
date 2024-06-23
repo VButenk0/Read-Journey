@@ -5,6 +5,7 @@ import sprite from "../../assets/sprite.svg";
 import BookCard from "../BookCard/BookCard";
 import {
   selectBooks,
+  selectIsAuthChecked,
   selectPage,
   selectTotalPages,
 } from "../../redux/selectors";
@@ -26,6 +27,7 @@ const RecommendedBooks = () => {
   const books = useSelector(selectBooks);
   const totalPagesBooks = useSelector(selectTotalPages);
   const page = useSelector(selectPage);
+  const isAuthChecked = useSelector(selectIsAuthChecked);
   const [actualPage, setActualPage] = useState(page);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -58,8 +60,10 @@ const RecommendedBooks = () => {
       return perPage;
     };
 
-    dispatch(recommendBooksThunk({ page: actualPage, limit: limit() }));
-  }, [dispatch, actualPage, isMobile, isTablet]);
+    if (isAuthChecked) {
+      dispatch(recommendBooksThunk({ page: actualPage, limit: limit() }));
+    }
+  }, [dispatch, actualPage, isMobile, isTablet, isAuthChecked]);
 
   return (
     <RcmndBooksWrpr>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookCard from "../BookCard/BookCard";
-import { selectLibrary } from "../../redux/selectors";
+import { selectIsAuthChecked, selectLibrary } from "../../redux/selectors";
 import {
   BooksList,
   LibHeader,
@@ -14,8 +14,9 @@ import { getUserBooksThunk } from "../../redux/books/operations";
 
 const MyLibraryBooks = () => {
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState("all");
   const library = useSelector(selectLibrary);
+  const isAuthChecked = useSelector(selectIsAuthChecked);
+  const [filter, setFilter] = useState("all");
 
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -30,8 +31,10 @@ const MyLibraryBooks = () => {
     if (filter !== "all") {
       dispatch(getUserBooksThunk(filter));
     }
-    dispatch(getUserBooksThunk());
-  }, [dispatch, filter]);
+    if (isAuthChecked) {
+      dispatch(getUserBooksThunk());
+    }
+  }, [dispatch, filter, isAuthChecked]);
 
   return (
     <LibraryWrpr>
