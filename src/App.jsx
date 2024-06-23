@@ -104,7 +104,6 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="*" element="/404.html" />
         </Route>
       </Routes>
     </>

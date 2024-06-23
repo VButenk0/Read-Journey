@@ -7,15 +7,19 @@ import {
 } from "../../redux/selectors";
 import { Emoji, EmojiModalWrpr, MainText, Title } from "./EmojiModals.styled";
 import { LogoutBtn } from "../Header/Header.styled";
+import { closeModals } from "../../redux/modals/modalsSlice";
 
 const EmojiModals = () => {
   const dispatch = useDispatch();
   const addedBookModal = useSelector(selectAddedBookModal);
   const readedBookModal = useSelector(selectreadedBookModal);
   const logoutModal = useSelector(selectLogoutModal);
-  console.log(addedBookModal);
-  console.log(readedBookModal);
-  console.log(logoutModal);
+
+  const handleYes = () => {
+    dispatch(signoutThunk());
+    dispatch(closeModals());
+  };
+
   return (
     <EmojiModalWrpr>
       {readedBookModal && <Emoji>📚</Emoji>}
@@ -34,7 +38,7 @@ const EmojiModals = () => {
           horizons, and the characters became inseparable friends.
         </MainText>
       ) : logoutModal ? (
-        <LogoutBtn onClick={() => dispatch(signoutThunk())}>Yes</LogoutBtn>
+        <LogoutBtn onClick={handleYes}>Yes</LogoutBtn>
       ) : (
         <MainText>
           Your book is now in <span>the library!</span> The joy knows no bounds

@@ -43,6 +43,7 @@ const MyLibraryPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
@@ -53,6 +54,7 @@ const MyLibraryPage = () => {
       .then(() => {
         dispatch(changeModalOpen(true));
         dispatch(changeAddedBookModal(true));
+        reset();
       });
   };
 

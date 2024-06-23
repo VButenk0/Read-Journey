@@ -40,6 +40,7 @@ export const modalsSlice = createSlice({
       state.startReadingModal = false;
       state.addedBookModal = false;
       state.readedBookModal = false;
+      state.logoutModal = false;
       state.burgerMenu = false;
     },
   },
