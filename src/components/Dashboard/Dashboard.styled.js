@@ -80,6 +80,12 @@ export const FilterInput = styled.div`
     color: var(--primary-text);
   }
 
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   input::placeholder {
     color: var(--primary-text);
   }

@@ -42,12 +42,16 @@ const ReadingPage = () => {
   const [isActive, setIsActive] = useState(false);
 
   const selectedItem = useSelector(selectSelectedItem);
-  const { id, status, progress } = selectedItem;
+  const { id, totalPages, status, progress } = selectedItem;
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string(),
-    author: Yup.string(),
-    totalPages: Yup.number(),
+    pages: Yup.number()
+      .min(1, "Page number must be at least 1")
+      .max(
+        totalPages,
+        `Page number must be less than or equal to ${totalPages}`
+      )
+      .required("Page number is required"),
   });
 
   const {
@@ -60,7 +64,7 @@ const ReadingPage = () => {
 
   const onSubmit = (data) => {
     if (progress) {
-      const page = data.totalPages;
+      const page = data.pages;
       if (isActive) {
         dispatch(finishReadingThunk({ id, page }));
         setIsActive(false);
@@ -107,11 +111,11 @@ const ReadingPage = () => {
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
               <InputsWrpr>
                 <FilterInput>
-                  <label htmlFor="totalPages">Page number:</label>
+                  <label htmlFor="pages">Page number:</label>
                   <input
-                    id="totalPages"
-                    name="totalPages"
-                    type="text"
+                    id="pages"
+                    name="pages"
+                    type="number"
                     placeholder="Enter text"
                     defaultValue={
                       (progress &&
@@ -119,11 +123,11 @@ const ReadingPage = () => {
                           progress[progress.length - 1]?.startPage + 1)) ||
                       1
                     }
-                    {...register("totalPages")}
+                    min={1}
+                    max={totalPages}
+                    {...register("pages")}
                   />
-                  {errors.totalPages && (
-                    <ErrorMsg>{errors.totalPages.message}</ErrorMsg>
-                  )}
+                  {errors.pages && <ErrorMsg>{errors.pages.message}</ErrorMsg>}
                 </FilterInput>
               </InputsWrpr>
               <ToApplyBtn type="submit">
