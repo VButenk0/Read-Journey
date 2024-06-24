@@ -33,17 +33,17 @@ function App() {
       if (token) {
         try {
           await dispatch(currentThunk()).unwrap();
-          dispatch(changeAuthChecked(true));
         } catch {
           if (refreshToken) {
             try {
               await dispatch(refreshThunk()).unwrap();
               await dispatch(currentThunk()).unwrap();
-              dispatch(changeAuthChecked(true));
             } catch (error) {
               return null;
             }
           }
+        } finally {
+          dispatch(changeAuthChecked(true));
         }
       }
     };
