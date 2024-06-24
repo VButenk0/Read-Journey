@@ -21,6 +21,7 @@ import {
   RcmndHeader,
   Title,
 } from "./RecommendedBooks.styled";
+import { NoBooksWrpr } from "../MyLibraryBooks/MyLibraryBooks.styled";
 
 const RecommendedBooks = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const RecommendedBooks = () => {
         <Title>Recommended</Title>
         <PaginationWrpr>
           <button
-            className={page <= 1 ? "disable" : ""}
+            className={!page || page <= 1 ? "disable" : ""}
             onClick={onDecrementClick}
           >
             <svg width="20" height="20">
@@ -79,7 +80,7 @@ const RecommendedBooks = () => {
             </svg>
           </button>
           <button
-            className={page >= totalPagesBooks ? "disable" : ""}
+            className={!page || page >= totalPagesBooks ? "disable" : ""}
             onClick={onIncrementClick}
           >
             <svg width="20" height="20">
@@ -88,18 +89,25 @@ const RecommendedBooks = () => {
           </button>
         </PaginationWrpr>
       </RcmndHeader>
-      <BooksList>
-        {books.map(({ id, title, author, imageUrl, totalPages }) => (
-          <BookCard
-            key={id}
-            id={id}
-            title={title}
-            author={author}
-            imageUrl={imageUrl}
-            totalPages={totalPages}
-          />
-        ))}
-      </BooksList>
+      {books.length ? (
+        <BooksList>
+          {books.map(({ id, title, author, imageUrl, totalPages }) => (
+            <BookCard
+              key={id}
+              id={id}
+              title={title}
+              author={author}
+              imageUrl={imageUrl}
+              totalPages={totalPages}
+            />
+          ))}
+        </BooksList>
+      ) : (
+        <NoBooksWrpr>
+          <p>📚</p>
+          <p>No books are fit to your search</p>
+        </NoBooksWrpr>
+      )}
     </RcmndBooksWrpr>
   );
 };
