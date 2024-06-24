@@ -39,6 +39,7 @@ import { ErrorMsg } from "../../components/AuthPage/AuthPage.styled";
 const ReadingPage = () => {
   const dispatch = useDispatch();
   const [mode, setMode] = useState("Diary");
+  const [isActive, setIsActive] = useState(false);
 
   const selectedItem = useSelector(selectSelectedItem);
   const { id, status, progress } = selectedItem;
@@ -57,19 +58,16 @@ const ReadingPage = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const isActive = progress?.some((p) => p.status === "active");
-
   const onSubmit = (data) => {
-    const page = data.totalPages;
-    if (isActive) {
-      dispatch(finishReadingThunk({ id, page }));
-      toast.success("You have finished reading");
-    } else {
-      if (page > progress[progress.length - 1].finishPage) {
+    if (progress) {
+      const page = data.totalPages;
+      if (isActive) {
+        dispatch(finishReadingThunk({ id, page }));
+        setIsActive(false);
+        toast.success("You have finished reading");
+      } else {
         dispatch(startReadingThunk({ id, page }));
         toast.success("You started reading");
-      } else {
-        toast.error("You can't read readed page");
       }
     }
   };
@@ -85,11 +83,20 @@ const ReadingPage = () => {
   };
 
   useEffect(() => {
+    if (progress) {
+      setIsActive(() => {
+        if (progress.some((p) => p.status === "active")) {
+          return true;
+        }
+        return false;
+      });
+    }
+
     if (status === "done") {
       dispatch(changeModalOpen(true));
       dispatch(changeReadedBookModal(true));
     }
-  }, [dispatch, id, status]);
+  }, [dispatch, id, progress, status]);
 
   return (
     <Container>
@@ -107,8 +114,9 @@ const ReadingPage = () => {
                     type="text"
                     placeholder="Enter text"
                     defaultValue={
-                      progress[progress.length - 1]?.finishPage + 1 ||
-                      progress[progress.length - 1]?.startPage + 1 ||
+                      (progress &&
+                        (progress[progress.length - 1]?.finishPage + 1 ||
+                          progress[progress.length - 1]?.startPage + 1)) ||
                       1
                     }
                     {...register("totalPages")}
@@ -124,7 +132,7 @@ const ReadingPage = () => {
             </StyledForm>
           </FiltersWrpr>
           <ProgressWrpr>
-            {status === "unread" ? (
+            {!progress?.some((p) => p.finishPage) ? (
               <ProgressTitle>Progress</ProgressTitle>
             ) : mode === "Diary" ? (
               <StatNTitleWrpr>
@@ -172,7 +180,7 @@ const ReadingPage = () => {
               </StatNTitleWrpr>
             )}
 
-            {!progress.some((p) => p.finishPage) ? (
+            {!progress?.some((p) => p.finishPage) ? (
               <>
                 <ProgrDscrText>
                   Here you will see when and how much you read. To record, click

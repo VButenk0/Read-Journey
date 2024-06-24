@@ -10,12 +10,24 @@ import {
   RecStopIcon,
   Title,
 } from "./MyBook.styled";
+import { useEffect, useState } from "react";
 
 const MyBook = () => {
   const selectedBook = useSelector(selectSelectedItem);
+  const [isActive, setIsActive] = useState(false);
   const { title, author, imageUrl, progress } = selectedBook;
 
-  const isActive = progress.some((p) => p.status === "active");
+  useEffect(() => {
+    if (progress) {
+      setIsActive(() => {
+        if (progress.some((p) => p.status === "active")) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+  }, [progress]);
 
   return (
     <ReadingWrpr>

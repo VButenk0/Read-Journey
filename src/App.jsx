@@ -38,12 +38,11 @@ function App() {
             try {
               await dispatch(refreshThunk()).unwrap();
               await dispatch(currentThunk()).unwrap();
+              await dispatch(changeAuthChecked(true)).unwrap();
             } catch (error) {
               return null;
             }
           }
-        } finally {
-          dispatch(changeAuthChecked(true));
         }
       }
     };
